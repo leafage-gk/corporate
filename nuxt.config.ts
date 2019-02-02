@@ -29,8 +29,43 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: 'https://leafage.co.jp' },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: '',
+        template: (chunk: string) =>
+          chunk ? `${chunk} | リーフエイジ合同会社` : 'リーフエイジ合同会社',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: pkg.description,
+      },
+      // {
+      //   hid: 'og:image',
+      //   property: 'og:image',
+      //   content: `${envSet.BASE_URL}/images/common/ogp.png`,
+      // },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: '',
+        template: (chunk: string) =>
+          chunk ? `${chunk} | リーフエイジ合同会社` : 'リーフエイジ合同会社',
+      },
+      { hid: 'twitter:card', name: 'twitter:card', content: pkg.description },
+      {
+        hid: 'twitter:title',
+        property: 'twitter:title',
+        content: '',
+        template: (chunk: string) =>
+          chunk ? `${chunk} | リーフエイジ合同会社` : 'リーフエイジ合同会社',
+      },
     ],
-    title: pkg.name,
+    titleTemplate: `%s | リーフエイジ合同会社`,
+    title: 'リーフエイジ合同会社',
   },
 
   env: {

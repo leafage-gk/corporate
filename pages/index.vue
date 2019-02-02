@@ -5,7 +5,7 @@
         <h1 class="shadow-text mb-2 text-xs-center">
           Webをもっと自由に美しく
         </h1>
-        <div class="shadow-text subheading mb-3 text-xs-center">
+        <div class="hero-subtext shadow-text mb-3 text-xs-center">
           TypeScriptで紡ぐ次世代のWeb制作会社、リーフエイジ合同会社
         </div>
       </v-layout>
@@ -94,7 +94,7 @@
             お問い合わせ、お見積もりはお気軽にご相談下さい。
           </div>
           <v-btn class="secondary lighten-2 mt-5" dark large to="/contact">
-            お問合せ（準備中）
+            お問合せ
           </v-btn>
         </v-layout>
       </v-parallax>
@@ -105,11 +105,24 @@
 <script lang="ts">
 import Vue from 'vue';
 
-export default Vue.extend({});
+export default Vue.extend({
+  head() {
+    return {
+      title: 'TOP',
+    };
+  },
+});
 </script>
 
 <style lang="stylus" scoped>
 .shadow-text {
   text-shadow: 0px 0px 8px #004D40;
+}
+
+.hero-subtext {
+  font-size: 20px !important;
+  font-weight: 400;
+  line-height: 32px !important;
+  letter-spacing: normal !important;
 }
 </style>
