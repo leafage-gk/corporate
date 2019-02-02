@@ -12,6 +12,7 @@
     "post-update": "yarn upgrade --latest"
   },
   "dependencies": {
+    "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/vuetify": "^0.5.2",
     "contentful": "^7.1.0",
     "nuxt": "^2.4.2",

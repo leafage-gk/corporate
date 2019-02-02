@@ -91,7 +91,16 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/vuetify', 'nuxt-webfontloader'],
+  modules: [
+    '@nuxtjs/vuetify',
+    'nuxt-webfontloader',
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'UA-133651179-1',
+      },
+    ],
+  ],
 
   vuetify: {
     // Vuetify options
