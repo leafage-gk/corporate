@@ -1,7 +1,7 @@
 {
-  "name": "portal",
+  "name": "corporate",
   "version": "1.0.0",
-  "description": "Zero config TypeScript Nuxt.js portal page project",
+  "description": "TypeScriptで紡ぐ次世代のWeb制作会社、リーフエイジ合同会社 ",
   "author": "ktone1",
   "private": true,
   "scripts": {
