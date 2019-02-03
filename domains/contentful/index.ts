@@ -1,9 +1,9 @@
+export * from './press';
+
 export interface BlogPost {
   title: string;
   slug: string;
-}
-
-export interface NewsPost {
-  title: string;
-  slug: string;
+  body: string;
+  publishedAt: string;
+  headerImage?: string;
 }

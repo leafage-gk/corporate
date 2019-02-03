@@ -1,6 +1,6 @@
 <template>
   <v-app class="m-plus-rounded-1c">
-    <v-navigation-drawer v-model="drawer" fixed app>
+    <v-navigation-drawer v-model="drawer" fixed app v-if="!isBrowser">
       <v-list>
         <v-list-tile to="/" router exact>
           <v-list-tile-content>

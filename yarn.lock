@@ -1116,6 +1116,14 @@
   dependencies:
     vue-analytics "^5.4.0"
 
+"@nuxtjs/moment@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/moment/-/moment-1.1.0.tgz#4e3aa33da92f6c29f1863ecd629b408852483143"
+  integrity sha512-kgGFuu+SJYaIbS2KIxOZYMEVZMOg2eF/1RI6KYGbdIXxnp7f/lB3f8IdZu7cN7r1TyNr/tiFhCrCEw4B7n153A==
+  dependencies:
+    moment "^2.22.2"
+    moment-locales-webpack-plugin "^1.0.7"
+
 "@nuxtjs/vuetify@^0.5.2":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@nuxtjs/vuetify/-/vuetify-0.5.2.tgz#54037cba0053107a7320ba5df33042f86d55cdb3"
@@ -4449,6 +4457,11 @@ lodash.debounce@^4.0.8:
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
+lodash.difference@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.difference/-/lodash.difference-4.5.0.tgz#9ccb4e505d486b91651345772885a2df27fd017c"
+  integrity sha1-nMtOUF1Ia5FlE0V3KIWi3yf9AXw=
+
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
@@ -4736,6 +4749,18 @@ mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   dependencies:
     minimist "0.0.8"
+
+moment-locales-webpack-plugin@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/moment-locales-webpack-plugin/-/moment-locales-webpack-plugin-1.0.7.tgz#ce2931b8a25100dae0868adbd9e93972dcb33359"
+  integrity sha512-KjYpaAhmuzGFZl6534FlZoK7QtW3vqlxd+A17W9DlgHJ5yhXANy7AZJl7iYtZpWjAfMTAWiVrQ7YDZdkFO6uRw==
+  dependencies:
+    lodash.difference "^4.5.0"
+
+moment@^2.22.2:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 move-concurrently@^1.0.1:
   version "1.0.1"

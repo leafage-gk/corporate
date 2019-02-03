@@ -1,14 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const pkg = require('./package');
 require('dotenv').config();
 
-// import contentful from 'contentful';
-// import { BlogPost } from './domains/contentful';
-
-// const ctfClient = contentful.createClient({
-//   accessToken: process.env.CTF_CDA_ACCESS_TOKEN!,
-//   space: process.env.CTF_SPACE_ID!
-// });
+import * as contentful from 'contentful';
+import { PressRepository } from './domains/contentful';
 
 export default {
   mode: 'spa',
@@ -86,7 +83,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/contentful'],
+  plugins: ['~/plugins/contentful', '~/plugins/filters'],
 
   /*
    ** Nuxt.js modules
@@ -98,6 +95,13 @@ export default {
       '@nuxtjs/google-analytics',
       {
         id: 'UA-133651179-1',
+      },
+    ],
+    [
+      '@nuxtjs/moment',
+      {
+        defaultLocale: 'ja',
+        locales: ['ja'],
       },
     ],
   ],
@@ -132,12 +136,22 @@ export default {
     },
   },
 
-  // generate: {
-  //   async routes() {
-  //     const entries = await ctfClient.getEntries<IBlogPost>({
-  //       content_type: 'newsPost'
-  //     });
-  //     return [...entries.items.map(entry => `/blog/${entry.fields.slug}`)];
-  //   }
-  // }
+  generate: {
+    async routes() {
+      const client = contentful.createClient({
+        accessToken: process.env.CTF_CDA_ACCESS_TOKEN!,
+        space: process.env.CTF_SPACE_ID!,
+      });
+      const repo = new PressRepository(client);
+      const entries = await repo.all();
+      return [
+        ...entries
+          .filter(entry => entry.slug)
+          .map(entry => ({
+            route: `/press/${entry.slug!}`,
+            payload: entry,
+          })),
+      ];
+    },
+  },
 };

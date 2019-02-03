@@ -1,13 +1,12 @@
-import Vue, { ComponentOptions } from 'vue';
+import moment from 'moment';
+import Vue from 'vue';
 import { ContentfulClientApi } from 'contentful';
-
-declare module '*.vue' {
-  const _default: ComponentOptions<Vue>;
-  export default _default;
-}
+import { PressRepository } from '~/domains/contentful';
 
 interface InjectedByPlugin {
   $contentful: ContentfulClientApi;
+  $press: PressRepository;
+  $moment: typeof moment;
 }
 
 declare module '@nuxt/vue-app-edge' {
