@@ -13,13 +13,13 @@
     <section>
       <v-layout column wrap class="my-5" align-center>
         <v-flex xs12 sm4 class="my-3">
-          <div class="text-xs-center">
-            <h2 class="headline">
+          <div class="text-xs-center pa-3">
+            <h2 class="myheadline">
               最先端、短納期、高品質のWebサイト、アプリを低価格で実現します。
             </h2>
-            <span class="subheading">
+            <p class="mysubheadline">
               FaaSやHeadless CMS導入でランニングコストも最小限に抑えられます。
-            </span>
+            </p>
           </div>
         </v-flex>
         <v-flex xs12>
@@ -28,7 +28,7 @@
               <v-flex xs12 md4>
                 <v-card class="elevation-0 transparent">
                   <v-card-text class="text-xs-center">
-                    <v-icon x-large class="primary--text text--lighten-2">
+                    <v-icon x-large class="red--text text--lighten-2">
                       color_lens
                     </v-icon>
                   </v-card-text>
@@ -47,8 +47,8 @@
               <v-flex xs12 md4>
                 <v-card class="elevation-0 transparent">
                   <v-card-text class="text-xs-center">
-                    <v-icon x-large class="primary--text text--lighten-2">
-                      flash_on
+                    <v-icon x-large class="light-blue--text text--lighten-2">
+                      group
                     </v-icon>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
@@ -64,7 +64,7 @@
               <v-flex xs12 md4>
                 <v-card class="elevation-0 transparent">
                   <v-card-text class="text-xs-center">
-                    <v-icon x-large class="primary--text text--lighten-2">
+                    <v-icon x-large class="amber--text text--lighten-2">
                       build
                     </v-icon>
                   </v-card-text>
@@ -124,5 +124,13 @@ export default Vue.extend({
   font-weight: 400;
   line-height: 32px !important;
   letter-spacing: normal !important;
+}
+
+.myheadline {
+  font-size: 24px;
+}
+
+.mysubheadline {
+  font-size: 20px;
 }
 </style>
