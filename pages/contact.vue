@@ -6,7 +6,7 @@
           name="contact"
           action="/contact_thanks/"
           data-netlify="true"
-          data-netlify-honeypot="bot-field"
+          data-netlify-recaptcha="true"
           method="POST"
         >
           <v-card-title class="headline grey lighten-2" primary-title>
@@ -18,11 +18,19 @@
               <td>{{ props.item.value }}</td>
             </template>
           </v-data-table>
-          <v-divider></v-divider>
+          <v-divider />
+          <v-card-text>
+            <v-layout justify-center align-center>
+              <vue-recaptcha
+                :sitekey="recaptchaKey"
+                @verify="verify"
+              ></vue-recaptcha>
+            </v-layout>
+          </v-card-text>
+          <v-divider />
           <v-card-actions>
             <v-spacer></v-spacer>
             <input type="hidden" name="form-name" value="contact" />
-            <input type="hidden" name="bot-field" />
             <input
               v-bind:key="item.name"
               v-for="item in contactList"
@@ -30,7 +38,12 @@
               :name="item.name"
               :value="item.value"
             />
-            <v-btn color="primary" flat type="submit">
+            <input
+              type="hidden"
+              name="g-recaptcha-response"
+              :value="recaptcha"
+            />
+            <v-btn :disabled="!verified" color="primary" flat type="submit">
               送信
             </v-btn>
             <v-btn color="secondery" flat @click="dialog = false">
@@ -123,9 +136,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import VueRecaptcha from 'vue-recaptcha';
 import { VuetifyForm } from '~/types/vuetify';
 
 export default Vue.extend({
+  components: {
+    VueRecaptcha,
+  },
   data() {
     return {
       valid: true,
@@ -153,15 +170,16 @@ export default Vue.extend({
       items: [
         {
           text: 'TOP',
-          href: '/',
-          disabled: false,
+          to: '/',
         },
         {
           text: 'お問合せ',
-          href: '/contact',
-          disabled: true,
+          to: '/contact',
         },
       ],
+      recaptchaKey: process.env.SITE_RECAPTCHA_KEY,
+      recaptcha: '',
+      verified: false,
     };
   },
   computed: {
@@ -187,9 +205,22 @@ export default Vue.extend({
         this.dialog = true;
       }
     },
+    verify(response: string) {
+      this.recaptcha = response;
+      this.verified = true;
+    },
   },
   head() {
     return {
+      script: [
+        {
+          innerHTML: '',
+          type: 'text/javascript',
+          src:
+            '//www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit',
+          async: 'true',
+        },
+      ],
       title: 'お問合せ',
     };
   },

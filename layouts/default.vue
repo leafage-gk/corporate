@@ -78,25 +78,23 @@ import Vue from 'vue';
 export default Vue.extend({
   data() {
     return {
-      width: window ? window.innerWidth : null,
+      isBrowser: true,
       drawer: false,
     };
   },
-  computed: {
-    isBrowser(): boolean {
-      return this.width ? this.width > 768 : false;
-    },
-  },
   methods: {
     setResize() {
-      this.width = window ? window.innerWidth : null;
+      if (window) {
+        this.isBrowser = window.innerWidth > 768;
+      }
     },
   },
-  created() {
+  mounted() {
     if (window) {
       window.addEventListener('resize', () => {
         this.setResize();
       });
+      this.setResize();
     }
   },
 });

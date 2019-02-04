@@ -4,16 +4,18 @@
       <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
       <v-layout align-center justify-center column>
         <v-subheader><h2>プレスリリース一覧</h2></v-subheader>
-        <v-flex v-bind:key="item.sys.id" v-for="(item, index) in posts">
-          <press-summary
-            :to="item.linkTo"
-            :image="item.summaryImage"
-            :title="item.title"
-            :body="item.summary"
-            :published-at="item.publishedAt"
-          />
-          <v-divider v-if="index < posts.length" />
-        </v-flex>
+        <no-ssr>
+          <v-flex v-bind:key="item.id" v-for="(item, index) in posts">
+            <press-summary
+              :to="item.linkTo"
+              :image="item.summaryImage"
+              :title="item.title"
+              :body="item.summary"
+              :published-at="item.publishedAt"
+            />
+            <v-divider v-if="index < posts.length" />
+          </v-flex>
+        </no-ssr>
       </v-layout>
     </v-container>
   </v-content>
@@ -35,12 +37,14 @@ export default Vue.extend({
       items: [
         {
           text: 'TOP',
-          href: '/',
+          to: '/',
+          exact: true,
           disabled: false,
         },
         {
           text: 'プレスリリース一覧',
-          href: '/press',
+          to: '/press',
+          exact: true,
           disabled: true,
         },
       ],

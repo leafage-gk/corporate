@@ -5,9 +5,9 @@
   "author": "ktone1",
   "private": true,
   "scripts": {
-    "dev": "nuxt-ts dev --spa",
-    "build": "nuxt-ts build --spa",
-    "start": "nuxt-ts start --spa",
+    "dev": "nuxt-ts dev",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
     "post-update": "yarn upgrade --latest"
   },
@@ -21,6 +21,7 @@
     "nuxt": "^2.4.2",
     "nuxt-ts-edge": "latest",
     "nuxt-webfontloader": "^1.0.0",
+    "vue-recaptcha": "^1.1.1",
     "vuetify": "^1.4.4"
   },
   "devDependencies": {

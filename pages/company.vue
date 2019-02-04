@@ -90,13 +90,11 @@ export default Vue.extend({
       items: [
         {
           text: 'TOP',
-          href: '/',
-          disabled: false,
+          to: '/',
         },
         {
           text: '会社概要',
-          href: '/company',
-          disabled: true,
+          to: '/company',
         },
       ],
     };

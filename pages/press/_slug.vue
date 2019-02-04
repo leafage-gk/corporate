@@ -36,7 +36,7 @@ interface Data {
   press: PressPost;
   items: {
     text: string;
-    href: string;
+    to: string;
     disabled: boolean;
   }[];
 }
@@ -44,31 +44,32 @@ interface Data {
 // 型パラメータ指定しないとnuxtの型定義がうまく型推論されない…
 export default Vue.extend<Data, {}, {}, never>({
   async asyncData(context: Context) {
-    if (context.payload) {
-      return { press: context.payload as PressPost };
-    }
     const slug = context.params['slug'];
-    const press = await context.$press.get(slug);
-    return {
-      press,
-      items: [
-        {
-          text: 'TOP',
-          href: '/',
-          disabled: false,
-        },
-        {
-          text: 'プレスリリース一覧',
-          href: '/press',
-          disabled: false,
-        },
-        {
-          text: press.title,
-          href: `/press/${press.slug}`,
-          disabled: true,
-        },
-      ],
-    };
+    const press = context.payload
+      ? (context.payload as PressPost)
+      : await context.$press.get(slug);
+    if (press) {
+      return {
+        press,
+        items: [
+          {
+            text: 'TOP',
+            to: '/',
+          },
+          {
+            text: 'プレスリリース一覧',
+            to: '/press',
+            exact: true,
+          },
+          {
+            text: press.title,
+            to: `/press/${press.slug}`,
+          },
+        ],
+      };
+    } else {
+      context.error({ statusCode: 404, message: 'Not found.' });
+    }
   },
   head() {
     return {

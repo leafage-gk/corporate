@@ -8,7 +8,7 @@ import * as contentful from 'contentful';
 import { PressRepository } from './domains/contentful';
 
 export default {
-  mode: 'spa',
+  mode: 'universal',
 
   /*
    ** Headers of the page
@@ -68,6 +68,8 @@ export default {
   env: {
     CTF_CDA_ACCESS_TOKEN: process.env.CTF_CDA_ACCESS_TOKEN,
     CTF_SPACE_ID: process.env.CTF_SPACE_ID,
+    SITE_RECAPTCHA_KEY: process.env.SITE_RECAPTCHA_KEY,
+    SITE_RECAPTCHA_SECRET: process.env.SITE_RECAPTCHA_SECRET,
   },
 
   /*

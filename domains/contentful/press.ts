@@ -1,4 +1,4 @@
-import { ContentfulClientApi, Sys, Entry } from 'contentful';
+import { ContentfulClientApi, Entry } from 'contentful';
 import { MediaResponse } from './media';
 
 export interface PressPostSummaryResponse {
@@ -15,55 +15,48 @@ export interface PressPostResponse extends PressPostSummaryResponse {
   headerImage?: MediaResponse;
 }
 
-export class PressPostSummary {
-  public readonly title: string;
-  public readonly summary: string;
-  public readonly slug?: string;
-  public readonly summaryImage?: string;
-  public readonly publishedAt: string;
-  public readonly sys: Sys;
-
-  private readonly _linkTo?: string;
-
-  public constructor(response: Entry<PressPostSummaryResponse>) {
-    this.title = response.fields.title;
-    this.summary = response.fields.summary;
-    this.slug = response.fields.slug;
-    if (response.fields.summaryImage) {
-      this.summaryImage = response.fields.summaryImage.fields.file.url;
-    }
-    this.publishedAt = response.fields.publishedAt;
-    this.sys = response.sys;
-    this._linkTo = response.fields.linkTo;
-  }
-
-  public get linkTo(): string | undefined {
-    if (this.slug) {
-      return `/press/${this.slug}`;
-    }
-    return this._linkTo;
-  }
+export interface PressPostSummary {
+  id: string;
+  title: string;
+  summary: string;
+  slug?: string;
+  linkTo?: string;
+  summaryImage?: string;
+  publishedAt: string;
 }
 
-export class PressPost extends PressPostSummary {
-  public readonly headerImage?: string;
+export function responseToPressPostSummary(
+  response: Entry<PressPostSummaryResponse>,
+): PressPostSummary {
+  return {
+    id: response.sys.id,
+    title: response.fields.title,
+    summary: response.fields.summary,
+    slug: response.fields.slug,
+    linkTo: response.fields.slug
+      ? `/press/${response.fields.slug}`
+      : response.fields.linkTo,
+    summaryImage: response.fields.summaryImage
+      ? response.fields.summaryImage.fields.file.url
+      : undefined,
+    publishedAt: response.fields.publishedAt,
+  };
+}
 
-  private readonly _body?: string;
+export interface PressPost extends PressPostSummary {
+  body?: string;
+  headerImage?: string;
+}
 
-  public constructor(response: Entry<PressPostResponse>) {
-    super(response);
-    if (response.fields.headerImage) {
-      this.headerImage = response.fields.headerImage.fields.file.url;
-    }
-    this._body = response.fields.body;
-  }
-
-  public get body(): string {
-    if (this._body) {
-      return this._body;
-    }
-    return this.summary;
-  }
+export function responseToPressPost(
+  response: Entry<PressPostResponse>,
+): PressPost {
+  return Object.assign(responseToPressPostSummary(response), {
+    body: response.fields.body ? response.fields.body : response.fields.summary,
+    headerImage: response.fields.headerImage
+      ? response.fields.headerImage.fields.file.url
+      : undefined,
+  });
 }
 
 export class PressRepository {
@@ -79,7 +72,7 @@ export class PressRepository {
       content_type: 'pressPost',
     });
     return posts.items.map(item => {
-      return new PressPost(item);
+      return responseToPressPost(item);
     });
   }
 
@@ -103,18 +96,18 @@ export class PressRepository {
       limit,
     });
     return posts.items.map(item => {
-      return new PressPostSummary(item);
+      return responseToPressPostSummary(item);
     });
   }
 
-  public async get(slug: string): Promise<PressPost | null> {
+  public async get(slug: string): Promise<PressPost | undefined> {
     const posts = await this.client.getEntries<PressPostResponse>({
       // eslint-disable-next-line @typescript-eslint/camelcase
       content_type: 'pressPost',
       'fields.slug': slug,
       order: '-sys.createdAt',
     });
-    const items = posts.items.map(item => new PressPost(item));
-    return items[0] || null;
+    const items = posts.items.map(item => responseToPressPost(item));
+    return items[0] || undefined;
   }
 }

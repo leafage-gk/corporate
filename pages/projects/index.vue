@@ -39,13 +39,11 @@ export default Vue.extend({
       items: [
         {
           text: 'TOP',
-          href: '/',
-          disabled: false,
+          to: '/',
         },
         {
           text: 'プロジェクト一覧',
-          href: '/projects',
-          disabled: true,
+          to: '/projects',
         },
       ],
     };

@@ -8,7 +8,8 @@ interface InjectedByPlugin {
   $contentful: ContentfulClientApi;
   $press: PressRepository;
   $moment: typeof moment;
-  payload?: {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  payload?: any;
 }
 
 declare module '@nuxt/vue-app-edge' {
