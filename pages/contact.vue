@@ -41,13 +41,15 @@
       </v-card>
     </v-dialog>
     <v-container>
-      <v-layout row wrap class="my-5" align-center>
+      <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
+      <v-layout wrap align-center justify-center>
+        <v-subheader><h2>お問合せ</h2></v-subheader>
         <v-flex xs12>
           <v-form ref="form" v-model="valid" lazy-validation>
             <v-select
               name="type"
               v-model="select"
-              :items="items"
+              :items="types"
               :rules="[v => !!v || '必須項目です。']"
               label="お問合せ種類"
               required
@@ -144,10 +146,22 @@ export default Vue.extend({
           v == '' || /^[\d-]+$/.test(v) || '正しい電話番号を入力してください。',
       ],
       select: '',
-      items: ['案件のご相談・ご依頼', 'パートナー募集', 'その他お問合せ'],
+      types: ['案件のご相談・ご依頼', 'パートナー募集', 'その他お問合せ'],
       content: '',
       contentRules: [(v: string) => !!v || '必須項目です。'],
       dialog: false,
+      items: [
+        {
+          text: 'TOP',
+          href: '/',
+          disabled: false,
+        },
+        {
+          text: 'お問合せ',
+          href: '/contact',
+          disabled: true,
+        },
+      ],
     };
   },
   computed: {

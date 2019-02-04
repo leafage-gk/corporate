@@ -1,8 +1,9 @@
 <template>
   <v-content>
     <v-container>
+      <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
       <v-layout align-center justify-center column>
-        <v-flex tag="h2" class="subheader">会社概要</v-flex>
+        <v-subheader><h2>会社概要</h2></v-subheader>
         <table class="overview">
           <tbody>
             <tr>
@@ -84,6 +85,22 @@
 import Vue from 'vue';
 
 export default Vue.extend({
+  data() {
+    return {
+      items: [
+        {
+          text: 'TOP',
+          href: '/',
+          disabled: false,
+        },
+        {
+          text: '会社概要',
+          href: '/company',
+          disabled: true,
+        },
+      ],
+    };
+  },
   head() {
     return {
       title: '会社概要',

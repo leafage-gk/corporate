@@ -90,6 +90,7 @@ export default {
    */
   modules: [
     '@nuxtjs/vuetify',
+    '@nuxtjs/markdownit',
     'nuxt-webfontloader',
     [
       '@nuxtjs/google-analytics',
@@ -117,6 +118,12 @@ export default {
       info: '#00bcd4',
       success: '#009688',
     },
+  },
+
+  markdownit: {
+    injected: true,
+    breaks: true,
+    linkify: true,
   },
 
   webfontloader: {

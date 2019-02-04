@@ -1,6 +1,7 @@
 <template>
   <v-content>
     <v-container>
+      <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
       <v-layout align-center justify-center column>
         <v-subheader><h2>プロジェクト一覧</h2></v-subheader>
         <v-card to="/projects/hifumira">
@@ -33,6 +34,22 @@
 import Vue from 'vue';
 
 export default Vue.extend({
+  data() {
+    return {
+      items: [
+        {
+          text: 'TOP',
+          href: '/',
+          disabled: false,
+        },
+        {
+          text: 'プロジェクト一覧',
+          href: '/projects',
+          disabled: true,
+        },
+      ],
+    };
+  },
   head() {
     return {
       title: 'プロジェクト一覧',

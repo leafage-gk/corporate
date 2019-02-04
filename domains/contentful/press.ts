@@ -12,7 +12,7 @@ export interface PressPostSummaryResponse {
 
 export interface PressPostResponse extends PressPostSummaryResponse {
   body?: string;
-  headerImage?: string;
+  headerImage?: MediaResponse;
 }
 
 export class PressPostSummary {
@@ -45,6 +45,27 @@ export class PressPostSummary {
   }
 }
 
+export class PressPost extends PressPostSummary {
+  public readonly headerImage?: string;
+
+  private readonly _body?: string;
+
+  public constructor(response: Entry<PressPostResponse>) {
+    super(response);
+    if (response.fields.headerImage) {
+      this.headerImage = response.fields.headerImage.fields.file.url;
+    }
+    this._body = response.fields.body;
+  }
+
+  public get body(): string {
+    if (this._body) {
+      return this._body;
+    }
+    return this.summary;
+  }
+}
+
 export class PressRepository {
   private client: ContentfulClientApi;
 
@@ -52,13 +73,13 @@ export class PressRepository {
     this.client = client;
   }
 
-  public async all(): Promise<PressPostResponse[]> {
+  public async all(): Promise<PressPost[]> {
     const posts = await this.client.getEntries<PressPostSummaryResponse>({
       // eslint-disable-next-line @typescript-eslint/camelcase
       content_type: 'pressPost',
     });
     return posts.items.map(item => {
-      return item.fields;
+      return new PressPost(item);
     });
   }
 
@@ -86,14 +107,14 @@ export class PressRepository {
     });
   }
 
-  public async get(slug: string): Promise<PressPostResponse | null> {
+  public async get(slug: string): Promise<PressPost | null> {
     const posts = await this.client.getEntries<PressPostResponse>({
       // eslint-disable-next-line @typescript-eslint/camelcase
       content_type: 'pressPost',
       'fields.slug': slug,
       order: '-sys.createdAt',
     });
-    const items = posts.items.map(item => item.fields);
+    const items = posts.items.map(item => new PressPost(item));
     return items[0] || null;
   }
 }
