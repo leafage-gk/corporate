@@ -108,7 +108,7 @@ import Vue from 'vue';
 export default Vue.extend({
   head() {
     return {
-      title: 'TOP',
+      title: '最先端のサイト制作のプロ',
     };
   },
 });

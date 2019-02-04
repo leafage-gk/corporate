@@ -5,7 +5,21 @@ const pkg = require('./package');
 require('dotenv').config();
 
 import * as contentful from 'contentful';
-import { PressRepository } from './domains/contentful';
+import { PressRepository, PressPost } from './domains/contentful';
+
+let press: PressPost[];
+
+async function getPress(): Promise<PressPost[]> {
+  if (!press) {
+    const client = contentful.createClient({
+      accessToken: process.env.CTF_CDA_ACCESS_TOKEN!,
+      space: process.env.CTF_SPACE_ID!,
+    });
+    const repo = new PressRepository(client);
+    press = await repo.all();
+  }
+  return press;
+}
 
 export default {
   mode: 'universal',
@@ -25,6 +39,12 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content:
+          'Web受託開発,ネイティブアプリ開発,サイト制作,モバイルサイト制作',
+      },
       { hid: 'description', name: 'description', content: pkg.description },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: 'https://leafage.co.jp' },
@@ -43,7 +63,7 @@ export default {
       // {
       //   hid: 'og:image',
       //   property: 'og:image',
-      //   content: `${envSet.BASE_URL}/images/common/ogp.png`,
+      //   content: 'https://leafage.co.jp/images/leafage.png',
       // },
       {
         hid: 'og:site_name',
@@ -93,7 +113,9 @@ export default {
   modules: [
     '@nuxtjs/vuetify',
     '@nuxtjs/markdownit',
+    '@nuxtjs/sitemap',
     'nuxt-webfontloader',
+    'nuxt-robots-module',
     [
       '@nuxtjs/google-analytics',
       {
@@ -145,14 +167,21 @@ export default {
     },
   },
 
+  sitemap: {
+    hostname: 'https://leafage.co.jp',
+    gzip: true,
+    generate: true,
+    async routes() {
+      const entries = await getPress();
+      return entries
+        .filter(entry => entry.slug)
+        .map(entry => `/press/${entry.slug!}`);
+    },
+  },
+
   generate: {
     async routes() {
-      const client = contentful.createClient({
-        accessToken: process.env.CTF_CDA_ACCESS_TOKEN!,
-        space: process.env.CTF_SPACE_ID!,
-      });
-      const repo = new PressRepository(client);
-      const entries = await repo.all();
+      const entries = await getPress();
       return [
         ...entries
           .filter(entry => entry.slug)
