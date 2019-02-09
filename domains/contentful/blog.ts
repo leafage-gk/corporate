@@ -1,113 +1,109 @@
 import { ContentfulClientApi, Entry } from 'contentful';
 import { MediaResponse } from './media';
 
-export interface PressPostSummaryResponse {
+export interface BlogPostSummaryResponse {
   title: string;
   summary: string;
-  slug?: string;
-  linkTo?: string;
-  summaryImage?: MediaResponse;
+  slug: string;
   publishedAt: string;
+  summaryImage?: MediaResponse;
 }
 
-export interface PressPostResponse extends PressPostSummaryResponse {
-  body?: string;
+export interface BlogPostResponse extends BlogPostSummaryResponse {
+  body: string;
   headerImage?: MediaResponse;
 }
 
-export interface PressPostSummary {
+export interface BlogPostSummary {
   id: string;
   title: string;
   summary: string;
-  slug?: string;
-  linkTo?: string;
-  summaryImage?: string;
+  slug: string;
+  linkTo: string;
   publishedAt: string;
+  summaryImage?: string;
 }
 
-export function responseToPressPostSummary(
-  response: Entry<PressPostSummaryResponse>,
-): PressPostSummary {
+export function responseToBlogPostSummary(
+  response: Entry<BlogPostSummaryResponse>,
+): BlogPostSummary {
   return {
     id: response.sys.id,
     title: response.fields.title,
     summary: response.fields.summary,
     slug: response.fields.slug,
-    linkTo: response.fields.slug
-      ? `/press/${response.fields.slug}`
-      : response.fields.linkTo,
+    linkTo: `/press/${response.fields.slug}`,
+    publishedAt: response.fields.publishedAt,
     summaryImage: response.fields.summaryImage
       ? response.fields.summaryImage.fields.file.url
       : undefined,
-    publishedAt: response.fields.publishedAt,
   };
 }
 
-export interface PressPost extends PressPostSummary {
-  body?: string;
+export interface BlogPost extends BlogPostSummary {
+  body: string;
   headerImage?: string;
 }
 
-export function responseToPressPost(
-  response: Entry<PressPostResponse>,
-): PressPost {
-  return Object.assign(responseToPressPostSummary(response), {
-    body: response.fields.body ? response.fields.body : response.fields.summary,
+export function responseToBlogPost(
+  response: Entry<BlogPostResponse>,
+): BlogPost {
+  return Object.assign(responseToBlogPostSummary(response), {
+    body: response.fields.body,
     headerImage: response.fields.headerImage
       ? response.fields.headerImage.fields.file.url
       : undefined,
   });
 }
 
-export class PressRepository {
+export class BlogRepository {
   private client: ContentfulClientApi;
 
   public constructor(client: ContentfulClientApi) {
     this.client = client;
   }
 
-  public async all(): Promise<PressPost[]> {
-    const posts = await this.client.getEntries<PressPostResponse>({
+  public async all(): Promise<BlogPost[]> {
+    const posts = await this.client.getEntries<BlogPostResponse>({
       // eslint-disable-next-line @typescript-eslint/camelcase
-      content_type: 'pressPost',
+      content_type: 'blogPost',
     });
     return posts.items.map(item => {
-      return responseToPressPost(item);
+      return responseToBlogPost(item);
     });
   }
 
   public async fetchRecently(
     skip: number,
     limit: number,
-  ): Promise<PressPostSummary[]> {
-    const posts = await this.client.getEntries<PressPostSummaryResponse>({
+  ): Promise<BlogPostSummary[]> {
+    const posts = await this.client.getEntries<BlogPostSummaryResponse>({
       select: [
         'fields.title',
         'fields.summary',
         'fields.slug',
-        'fields.linkTo',
         'fields.summaryImage',
         'fields.publishedAt',
       ].join(','),
       // eslint-disable-next-line @typescript-eslint/camelcase
-      content_type: 'pressPost',
+      content_type: 'blogPost',
       order: '-fields.publishedAt',
       skip,
       limit,
     });
     return posts.items.map(item => {
-      return responseToPressPostSummary(item);
+      return responseToBlogPostSummary(item);
     });
   }
 
-  public async get(slug: string): Promise<PressPost | undefined> {
-    const posts = await this.client.getEntries<PressPostResponse>({
+  public async get(slug: string): Promise<BlogPost | undefined> {
+    const posts = await this.client.getEntries<BlogPostResponse>({
       // eslint-disable-next-line @typescript-eslint/camelcase
       content_type: 'pressPost',
       'fields.slug': slug,
       order: '-sys.createdAt',
     });
-    const items = posts.items.map(item => responseToPressPost(item));
+    const items = posts.items.map(item => responseToBlogPost(item));
     return items[0] || undefined;
   }
 }
