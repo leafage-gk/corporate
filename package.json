@@ -17,14 +17,14 @@
     "@nuxtjs/markdownit": "^1.2.3",
     "@nuxtjs/moment": "^1.1.0",
     "@nuxtjs/sitemap": "^0.2.0",
-    "@nuxtjs/vuetify": "^0.5.2",
+    "@nuxtjs/vuetify": "^0.5.4",
     "contentful": "^7.1.0",
     "nuxt": "^2.4.2",
     "nuxt-robots-module": "^1.4.0",
     "nuxt-ts-edge": "latest",
     "nuxt-webfontloader": "^1.0.0",
     "vue-recaptcha": "^1.1.1",
-    "vuetify": "^1.4.4"
+    "vuetify": "^1.5.0"
   },
   "devDependencies": {
     "@types/markdown-it": "^0.0.7",

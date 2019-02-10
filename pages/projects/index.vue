@@ -22,7 +22,11 @@
           </v-card-title>
 
           <v-card-actions>
-            <v-btn flat color="orange" href="https://hifumira.com">詳細</v-btn>
+            <no-ssr>
+              <v-btn flat color="orange" href="https://hifumira.com">
+                詳細
+              </v-btn>
+            </no-ssr>
           </v-card-actions>
         </v-card>
       </v-layout>
