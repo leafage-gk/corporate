@@ -2,7 +2,7 @@
   <v-content>
     <v-layout column align-center justify-center class="ma-5">
       <h1 class="text-xs-center">
-        Comming Soon!
+        Coming Soon!
       </h1>
     </v-layout>
     <section>
