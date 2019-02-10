@@ -1,16 +1,19 @@
 <template>
   <v-content>
-    <v-container>
+    <blog-hero-header />
+    <v-container class="m-plus-rounded-1c">
       <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
       <v-layout column>
-        <v-subheader><h2>プレスリリース一覧</h2></v-subheader>
+        <v-subheader><h2>新着ブログ一覧</h2></v-subheader>
         <no-ssr>
           <v-flex v-bind:key="item.id" v-for="(item, index) in posts">
-            <press-summary
+            <blog-summary
               :to="item.linkTo"
               :image="item.summaryImage"
               :title="item.title"
+              :author="item.author"
               :body="item.summary"
+              :categories="item.categories"
               :published-at="item.publishedAt"
             />
             <v-divider v-if="index < posts.length" />
@@ -24,26 +27,28 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Context } from '@nuxt/vue-app-edge';
-import PressSummary from '~/components/PressSummary.vue';
+import BlogSummary from '~/components/BlogSummary.vue';
+import BlogHeroHeader from '~/components/BlogHeroHeader.vue';
 
 export default Vue.extend({
   components: {
-    PressSummary,
+    BlogSummary,
+    BlogHeroHeader,
   },
   async asyncData(context: Context) {
-    const posts = await context.$press.fetchRecently(0, 10);
+    const posts = await context.$blog.fetchRecently(0, 10);
     return {
       posts,
       items: [
         {
           text: 'TOP',
-          to: '/',
+          to: '/projects/hifumira',
           exact: true,
           disabled: false,
         },
         {
-          text: 'プレスリリース一覧',
-          to: '/press',
+          text: '新着ブログ一覧',
+          to: '/projects/hifumira/blog',
           exact: true,
           disabled: true,
         },
@@ -52,7 +57,7 @@ export default Vue.extend({
   },
   head() {
     return {
-      title: 'プレスリリース一覧',
+      title: '新着ブログ一覧 - VTuberプロジェクト＊ひふみら',
     };
   },
 });

@@ -1,6 +1,6 @@
 import { Context } from '@nuxt/vue-app-edge';
 import * as contentful from 'contentful';
-import { PressRepository } from '~/domains/contentful';
+import { PressRepository, BlogRepository } from '~/domains/contentful';
 
 export default (
   context: Context,
@@ -15,4 +15,7 @@ export default (
   const press = new PressRepository(client);
   context.$press = press;
   inject('press', press);
+  const blog = new BlogRepository(client);
+  context.$blog = blog;
+  inject('blog', blog);
 };

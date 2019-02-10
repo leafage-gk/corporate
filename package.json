@@ -24,6 +24,7 @@
     "nuxt-ts-edge": "latest",
     "nuxt-webfontloader": "^1.0.0",
     "vue-recaptcha": "^1.1.1",
+    "vue-social-sharing": "^2.3.3",
     "vuetify": "^1.4.4"
   },
   "devDependencies": {

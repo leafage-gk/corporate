@@ -85,3 +85,7 @@ sw.*
 
 # VS Code
 .vscode
+
+static/sitemap.xml
+static/sitemap.xml.gz
+static/robots.txt

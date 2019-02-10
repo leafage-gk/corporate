@@ -67,7 +67,7 @@ export class PressRepository {
   }
 
   public async all(): Promise<PressPost[]> {
-    const posts = await this.client.getEntries<PressPostSummaryResponse>({
+    const posts = await this.client.getEntries<PressPostResponse>({
       // eslint-disable-next-line @typescript-eslint/camelcase
       content_type: 'pressPost',
     });
