@@ -5,21 +5,10 @@ const pkg = require('./package');
 require('dotenv').config();
 
 import * as contentful from 'contentful';
-import {
-  PressRepository,
-  PressPost,
-  BlogCategory,
-  BlogAuthor,
-  BlogPost,
-  BlogRepository,
-} from './domains/contentful';
+import { PressRepository, PressPost } from './domains/contentful';
 
 let ctfClient: contentful.ContentfulClientApi;
-let blogRepo: BlogRepository;
 let press: PressPost[];
-let blogCategories: BlogCategory[];
-let blogAuthors: BlogAuthor[];
-let blogPosts: BlogPost[];
 
 function getClient(): contentful.ContentfulClientApi {
   if (!ctfClient) {
@@ -31,43 +20,12 @@ function getClient(): contentful.ContentfulClientApi {
   return ctfClient;
 }
 
-function getBlogRepo(): BlogRepository {
-  if (!blogRepo) {
-    blogRepo = new BlogRepository(getClient());
-  }
-  return blogRepo;
-}
-
 async function getPress(): Promise<PressPost[]> {
   if (!press) {
     const repo = new PressRepository(getClient());
     press = await repo.all();
   }
   return press;
-}
-
-async function getBlogCategories(): Promise<BlogCategory[]> {
-  if (!blogCategories) {
-    const repo = getBlogRepo();
-    blogCategories = await repo.category.all();
-  }
-  return blogCategories;
-}
-
-async function getBlogAuthors(): Promise<BlogAuthor[]> {
-  if (!blogAuthors) {
-    const repo = getBlogRepo();
-    blogAuthors = await repo.author.all();
-  }
-  return blogAuthors;
-}
-
-async function getBlogPosts(): Promise<BlogPost[]> {
-  if (!blogAuthors) {
-    const repo = getBlogRepo();
-    blogPosts = await repo.all();
-  }
-  return blogPosts;
 }
 
 export default {
@@ -201,7 +159,7 @@ export default {
 
   webfontloader: {
     google: {
-      families: ['M PLUS Rounded 1c', 'Nico Moji'],
+      families: ['M PLUS Rounded 1c'],
     },
   },
 
@@ -222,16 +180,10 @@ export default {
     generate: true,
     async routes() {
       const presses = await getPress();
-      const blogPosts = await getBlogPosts();
-      const blogCategories = await getBlogCategories();
-      const blogAuthors = await getBlogAuthors();
       return [
         ...presses
           .filter(press => press.slug)
           .map(press => `/press/${press.slug!}`),
-        ...blogPosts.map(blog => blog.linkTo),
-        ...blogCategories.map(cate => cate.to),
-        ...blogAuthors.map(author => author.to),
       ];
     },
   },
@@ -239,9 +191,6 @@ export default {
   generate: {
     async routes() {
       const presses = await getPress();
-      const blogPosts = await getBlogPosts();
-      const blogCategories = await getBlogCategories();
-      const blogAuthors = await getBlogAuthors();
       return [
         ...presses
           .filter(press => press.slug)
@@ -249,12 +198,6 @@ export default {
             route: `/press/${press.slug!}`,
             payload: press,
           })),
-        ...blogPosts.map(blog => ({
-          route: blog.linkTo,
-          payload: blog,
-        })),
-        ...blogCategories.map(cate => cate.to),
-        ...blogAuthors.map(author => author.to),
       ];
     },
   },

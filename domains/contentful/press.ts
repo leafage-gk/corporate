@@ -6,6 +6,7 @@ export interface PressPostSummaryResponse {
   summary: string;
   slug?: string;
   linkTo?: string;
+  linkHref?: string;
   summaryImage?: MediaResponse;
   publishedAt: string;
 }
@@ -21,8 +22,20 @@ export interface PressPostSummary {
   summary: string;
   slug?: string;
   linkTo?: string;
+  linkHref?: string;
   summaryImage?: string;
   publishedAt: string;
+}
+
+function parseLinkTo(
+  response: Entry<PressPostSummaryResponse>,
+): string | undefined {
+  if (!response.fields.linkHref) {
+    if (response.fields.slug) {
+      return `/press/${response.fields.slug}`;
+    }
+    return response.fields.linkTo;
+  }
 }
 
 export function responseToPressPostSummary(
@@ -33,9 +46,8 @@ export function responseToPressPostSummary(
     title: response.fields.title,
     summary: response.fields.summary,
     slug: response.fields.slug,
-    linkTo: response.fields.slug
-      ? `/press/${response.fields.slug}`
-      : response.fields.linkTo,
+    linkTo: parseLinkTo(response),
+    linkHref: response.fields.linkHref,
     summaryImage: response.fields.summaryImage
       ? response.fields.summaryImage.fields.file.url
       : undefined,
@@ -86,6 +98,7 @@ export class PressRepository {
         'fields.summary',
         'fields.slug',
         'fields.linkTo',
+        'fields.linkHref',
         'fields.summaryImage',
         'fields.publishedAt',
       ].join(','),

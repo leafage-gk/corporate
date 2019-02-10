@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="to">
+  <v-card :to="to" :href="href">
     <v-layout row>
       <v-flex xs4 sm3 md2 lg1 grow>
         <v-img
@@ -24,7 +24,11 @@
             <h3>{{ title }}</h3>
             <p>
               {{ body }}
-              <span v-if="to">
+              <span v-if="href">
+                <br />
+                <a :href="href">詳細</a>
+              </span>
+              <span v-else-if="to">
                 <br />
                 <nuxt-link :to="to">詳細</nuxt-link>
               </span>
@@ -42,6 +46,10 @@ import Vue from 'vue';
 export default Vue.extend({
   props: {
     to: {
+      type: String,
+      default: '',
+    },
+    href: {
       type: String,
       default: '',
     },

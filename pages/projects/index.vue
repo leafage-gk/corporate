@@ -4,7 +4,7 @@
       <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
       <v-layout align-center justify-center column>
         <v-subheader><h2>プロジェクト一覧</h2></v-subheader>
-        <v-card to="/projects/hifumira">
+        <v-card href="https://hifumira.com">
           <v-img
             :src="require('~/assets/images/hifumira.jpg')"
             aspect-ratio="2.75"
@@ -22,7 +22,7 @@
           </v-card-title>
 
           <v-card-actions>
-            <v-btn flat color="orange" to="/projects/hifumira">詳細</v-btn>
+            <v-btn flat color="orange" href="https://hifumira.com">詳細</v-btn>
           </v-card-actions>
         </v-card>
       </v-layout>

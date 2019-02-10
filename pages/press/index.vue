@@ -8,6 +8,7 @@
           <v-flex v-bind:key="item.id" v-for="(item, index) in posts">
             <press-summary
               :to="item.linkTo"
+              :href="item.linkHref"
               :image="item.summaryImage"
               :title="item.title"
               :body="item.summary"
