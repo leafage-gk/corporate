@@ -73,7 +73,7 @@
               v-model="name"
               :rules="nameRules"
               label="お名前"
-              placeholder="例：橘 聖"
+              placeholder="例：令和 太郎"
               counter="20"
               color="primary"
               required
@@ -84,7 +84,7 @@
               v-model="kana"
               :rules="kanaRules"
               label="ふりがな"
-              placeholder="例：たちばな ひじり"
+              placeholder="例：れいわ たろう"
               counter="20"
               required
             ></v-text-field>
@@ -94,7 +94,7 @@
               v-model="email"
               :rules="emailRules"
               label="メールアドレス"
-              placeholder="例：t_hiziri@leafage.co.jp"
+              placeholder="例：rtaro@leafage.co.jp"
               counter="100"
               required
             ></v-text-field>
@@ -121,7 +121,7 @@
               v-model="content"
               :rules="contentRules"
               label="お問合せ内容"
-              counter="1000"
+              counter="5000"
             ></v-textarea>
 
             <v-btn :disabled="!valid" color="success" @click="validate">

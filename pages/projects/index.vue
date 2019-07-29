@@ -5,11 +5,11 @@
       <v-layout align-center justify-center column>
         <v-subheader><h2>プロジェクト一覧</h2></v-subheader>
         <v-card href="https://hifumira.com">
-          <v-img
+          <!-- <v-img
             :src="require('~/assets/images/hifumira.jpg')"
             aspect-ratio="2.75"
             position="center top"
-          ></v-img>
+          ></v-img> -->
 
           <v-card-title primary-title>
             <div>

@@ -9,13 +9,13 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile to="/projects" router exact>
+        <!-- <v-list-tile to="/projects" router exact>
           <v-list-tile-content>
             <v-list-tile-title>
               プロジェクト
             </v-list-tile-title>
           </v-list-tile-content>
-        </v-list-tile>
+        </v-list-tile> -->
         <v-list-tile to="/press" router exact>
           <v-list-tile-content>
             <v-list-tile-title>
@@ -47,7 +47,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn flat color="white" to="/projects">プロジェクト</v-btn>
+        <!-- <v-btn flat color="white" to="/projects">プロジェクト</v-btn> -->
         <v-btn flat color="white" to="/press">プレス</v-btn>
         <v-btn flat color="white" to="/company">会社概要</v-btn>
         <v-btn flat color="white" to="/contact">お問合せ</v-btn>

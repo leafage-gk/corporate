@@ -116,7 +116,7 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .shadow-text {
-  text-shadow: 0px 0px 8px #004D40;
+  text-shadow: 0px 0px 16px #004439;
 }
 
 .hero-subtext {
