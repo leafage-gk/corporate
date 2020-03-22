@@ -102,39 +102,36 @@ export default Vue.extend({
       ],
     };
   },
-  head() {
-    return {
-      title: '会社概要',
-    };
+  head: {
+    title: '会社概要',
   },
 });
 </script>
 
-<style lang="stylus" scoped>
-@import '~vuetify/src/stylus/settings/_colors.styl';
+<style lang="scss" scoped>
+@import '~/assets/style/variables.scss';
 
 .subheader {
-  color: $grey.darken-3;
   margin: 10px;
+  // color: $grey.darken-3;
 }
 
 table.overview {
   margin: 10px;
+  // color: $grey.darken-3;
   border-collapse: collapse;
-  border: 1px solid $lime.lighten-5;
-  color: $grey.darken-3;
-  > tbody > tr  {
-    > th, > td {
-      border: 1px solid $lime.lighten-3;
+  // border: 1px solid $lime.lighten-5;
+  > tbody > tr {
+    > th,
+    > td {
       padding: 10px;
+      // border: 1px solid $lime.lighten-3;
     }
     > th {
-      background: $light-green.darken-1;
       color: white;
+      text-align: right;
+      // background: $light-green.darken-1;
     }
-  }
-  th {
-    text-align: right;
   }
 }
 </style>

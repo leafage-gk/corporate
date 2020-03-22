@@ -7,13 +7,13 @@
           :src="image"
           height="100%"
           :gradient="imageGradient"
-        ></v-img>
+        />
         <v-img
           v-else
-          :src="require('~/assets/images/press_summary.jpg')"
+          src="~/assets/images/press_summary.jpg"
           height="100%"
           :gradient="imageGradient"
-        ></v-img>
+        />
       </v-flex>
       <v-flex shrink align-start>
         <v-card-text primary-title>

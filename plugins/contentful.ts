@@ -1,5 +1,6 @@
-import { Context } from '@nuxt/vue-app-edge';
+import { Context } from '@nuxt/types';
 import * as contentful from 'contentful';
+
 import { PressRepository } from '~/domains/contentful';
 
 export default (

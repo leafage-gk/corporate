@@ -1,13 +1,6 @@
 <template>
   <v-content>
-    <v-img
-      :src="
-        press.headerImage
-          ? press.headerImage
-          : require('~/assets/images/press_header.jpg')
-      "
-      height="200"
-    >
+    <v-img :src="press.headerImage || defaultPressHeader" height="200">
       <v-layout pa-2 column fill-height class="lightbox white--text">
         <v-spacer />
         <v-flex shrink>
@@ -22,27 +15,30 @@
       <div class="grey--text">
         {{ press.publishedAt | dateFormat('YYYY年MM月DD日') }}
       </div>
-      <div class="press-body" v-html="$md.render(press.body)"></div>
+      <div class="press-body" v-html="$md.render(press.body || '')"></div>
     </v-container>
   </v-content>
 </template>
 
 <script lang="ts">
+import { Context } from '@nuxt/types';
 import Vue from 'vue';
-import { Context } from '@nuxt/vue-app-edge';
+
+import PressHeader from '~/assets/images/press_header.jpg';
 import { PressPost } from '~/domains/contentful';
 
-interface Data {
-  press: PressPost;
-  items: {
-    text: string;
-    to: string;
-    disabled: boolean;
-  }[];
-}
-
-// 型パラメータ指定しないとnuxtの型定義がうまく型推論されない…
-export default Vue.extend<Data, {}, {}, never>({
+export default Vue.extend({
+  data() {
+    return {
+      defaultPressHeader: PressHeader,
+      press: {} as PressPost,
+      items: [] as {
+        text: string;
+        to: string;
+        disabled: boolean;
+      }[],
+    };
+  },
   async asyncData(context: Context) {
     const slug = context.params['slug'];
     const press = context.payload
@@ -73,18 +69,23 @@ export default Vue.extend<Data, {}, {}, never>({
   },
   head() {
     return {
-      title: this.press.title,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      title: (this as any).press.title,
     };
   },
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .mysubheading {
   font-size: 24px;
   font-weight: bold;
 }
 .lightbox {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 60px);
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.3) 0%,
+    transparent 60px
+  );
 }
 </style>

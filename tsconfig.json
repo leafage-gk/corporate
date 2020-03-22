@@ -1,16 +1,30 @@
 {
-  "extends": "@nuxt/typescript-edge",
   "compilerOptions": {
-    "baseUrl": ".",
-    "types": [
-      "@types/node",
-      "@nuxt/vue-app-edge"
+    "target": "es2018",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": [
+      "esnext",
+      "esnext.asynciterable",
+      "dom",
     ],
-    "experimentalDecorators": true,
-    "removeComments": true,
-    "noImplicitThis": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "noEmit": true,
+    "baseUrl": ".",
     "paths": {
       "~/*": ["./*"]
-    }
-  }
+    },
+    "typeRoots": ["types", "node_modules/@types"],
+    "types": [
+      "@nuxt/types",
+      "@nuxtjs/moment",
+      "@nuxtjs/vuetify"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }

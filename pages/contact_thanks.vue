@@ -21,10 +21,8 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  head() {
-    return {
-      title: 'お問合せ完了',
-    };
+  head: {
+    title: 'お問合せ完了',
   },
 });
 </script>

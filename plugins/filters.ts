@@ -1,6 +1,6 @@
-import Vue from 'vue';
+import { Context } from '@nuxt/types';
 import { Moment } from 'moment';
-import { Context } from '@nuxt/vue-app-edge';
+import Vue from 'vue';
 
 export default (context: Context) => {
   Vue.filter(

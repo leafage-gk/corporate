@@ -11,8 +11,11 @@
     "plugin:prettier/recommended",
     "plugin:vue/essential"
   ],
+  "plugins": ["simple-import-sort"],
   "rules": {
     "@typescript-eslint/indent": ["error", 2],
-    "@typescript-eslint/no-empty-interface": "off"
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "simple-import-sort/sort": "error"
   }
 }

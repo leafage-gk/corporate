@@ -1,4 +1,5 @@
 import { ContentfulClientApi, Entry } from 'contentful';
+
 import { MediaResponse } from './media';
 
 export interface PressPostSummaryResponse {

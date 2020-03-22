@@ -137,6 +137,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import VueRecaptcha from 'vue-recaptcha';
+
 import { VuetifyForm } from '~/types/vuetify';
 
 export default Vue.extend({
@@ -210,19 +211,17 @@ export default Vue.extend({
       this.verified = true;
     },
   },
-  head() {
-    return {
-      script: [
-        {
-          innerHTML: '',
-          type: 'text/javascript',
-          src:
-            '//www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit',
-          async: 'true',
-        },
-      ],
-      title: 'お問合せ',
-    };
+  head: {
+    script: [
+      {
+        innerHTML: '',
+        type: 'text/javascript',
+        src:
+          '//www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit',
+        async: true,
+      },
+    ],
+    title: 'お問合せ',
   },
 });
 </script>

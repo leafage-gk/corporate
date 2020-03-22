@@ -106,17 +106,15 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  head() {
-    return {
-      title: '最先端のサイト制作のプロ',
-    };
+  head: {
+    title: '最先端のサイト制作のプロ',
   },
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .shadow-text {
-  text-shadow: 0px 0px 16px #004439;
+  text-shadow: 0 0 16px #004439;
 }
 
 .hero-subtext {

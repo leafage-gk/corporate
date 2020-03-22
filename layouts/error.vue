@@ -17,11 +17,12 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { NuxtError } from '@nuxt/types';
+import Vue, { PropOptions } from 'vue';
 
 export default Vue.extend({
   props: {
-    error: Object,
+    error: Object as PropOptions<NuxtError>,
   },
   head() {
     return {

@@ -1,16 +1,17 @@
-/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const pkg = require('./package');
 require('dotenv').config();
 
+import { Configuration } from '@nuxt/types';
 import * as contentful from 'contentful';
-import { PressRepository, PressPost } from './domains/contentful';
+
+import { PressPost, PressRepository } from './domains/contentful';
 
 let ctfClient: contentful.ContentfulClientApi;
 let press: PressPost[];
 
-function getClient(): contentful.ContentfulClientApi {
+function getClient() {
   if (!ctfClient) {
     ctfClient = contentful.createClient({
       accessToken: process.env.CTF_CDA_ACCESS_TOKEN!,
@@ -20,7 +21,7 @@ function getClient(): contentful.ContentfulClientApi {
   return ctfClient;
 }
 
-async function getPress(): Promise<PressPost[]> {
+async function getPress() {
   if (!press) {
     const repo = new PressRepository(getClient());
     press = await repo.all();
@@ -28,21 +29,14 @@ async function getPress(): Promise<PressPost[]> {
   return press;
 }
 
-export default {
+const configuration: Configuration = {
   mode: 'universal',
 
   /*
    ** Headers of the page
    */
   head: {
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons',
-        rel: 'stylesheet',
-      },
-    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -93,10 +87,10 @@ export default {
   },
 
   env: {
-    CTF_CDA_ACCESS_TOKEN: process.env.CTF_CDA_ACCESS_TOKEN,
-    CTF_SPACE_ID: process.env.CTF_SPACE_ID,
-    SITE_RECAPTCHA_KEY: process.env.SITE_RECAPTCHA_KEY,
-    SITE_RECAPTCHA_SECRET: process.env.SITE_RECAPTCHA_SECRET,
+    CTF_CDA_ACCESS_TOKEN: process.env.CTF_CDA_ACCESS_TOKEN!,
+    CTF_SPACE_ID: process.env.CTF_SPACE_ID!,
+    SITE_RECAPTCHA_KEY: process.env.SITE_RECAPTCHA_KEY!,
+    SITE_RECAPTCHA_SECRET: process.env.SITE_RECAPTCHA_SECRET!,
   },
 
   /*
@@ -107,7 +101,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['~/assets/style/app.styl'],
+  css: ['~/assets/style/app.scss'],
 
   /*
    ** Plugins to load before mounting the App
@@ -118,60 +112,23 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/vuetify',
     '@nuxtjs/markdownit',
     '@nuxtjs/sitemap',
     'nuxt-webfontloader',
     'nuxt-robots-module',
-    [
-      '@nuxtjs/google-analytics',
-      {
-        id: 'UA-133651179-1',
-      },
-    ],
-    [
-      '@nuxtjs/moment',
-      {
-        defaultLocale: 'ja',
-        locales: ['ja'],
-      },
-    ],
   ],
 
-  vuetify: {
-    // Vuetify options
-    theme: {
-      primary: '#8bc34a',
-      secondary: '#9c27b0',
-      accent: '#e91e63',
-      error: '#f44336',
-      warning: '#ffc107',
-      info: '#00bcd4',
-      success: '#009688',
-    },
-  },
+  buildModules: [
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/moment',
+    '@nuxtjs/vuetify',
+    '@nuxt/typescript-build',
+  ],
 
   markdownit: {
     injected: true,
     breaks: true,
     linkify: true,
-  },
-
-  webfontloader: {
-    google: {
-      families: ['M PLUS Rounded 1c'],
-    },
-  },
-
-  /*
-   ** Build configuration
-   */
-  build: {
-    loaders: {
-      stylus: {
-        import: ['~assets/style/variables.styl'],
-      },
-    },
   },
 
   sitemap: {
@@ -188,8 +145,28 @@ export default {
     },
   },
 
+  googleAnalytics: {
+    id: 'UA-133651179-1',
+  },
+
+  momemt: {
+    defaultLocale: 'ja',
+    locales: ['ja'],
+  },
+
+  vuetify: {
+    customVariables: ['~/assets/style/variables.scss'],
+    defaultAssets: {
+      font: {
+        family: 'M PLUS Rounded 1c',
+      },
+      icons: 'md',
+    },
+    optionsPath: './vuetify.options.ts',
+  },
+
   generate: {
-    async routes() {
+    routes: async () => {
       const presses = await getPress();
       return [
         ...presses
@@ -202,3 +179,5 @@ export default {
     },
   },
 };
+
+export default configuration;

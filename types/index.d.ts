@@ -1,7 +1,8 @@
+import { ContentfulClientApi } from 'contentful';
+import MarkdownIt from 'markdown-it';
 import moment from 'moment';
 import Vue from 'vue';
-import MarkdownIt from 'markdown-it';
-import { ContentfulClientApi } from 'contentful';
+
 import { PressRepository } from '~/domains/contentful';
 
 interface InjectedByPlugin {
@@ -12,7 +13,7 @@ interface InjectedByPlugin {
   payload?: any;
 }
 
-declare module '@nuxt/vue-app-edge' {
+declare module '@nuxt/types' {
   interface Context extends InjectedByPlugin {}
 }
 

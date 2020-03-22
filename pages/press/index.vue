@@ -23,13 +23,26 @@
 </template>
 
 <script lang="ts">
+import { Context } from '@nuxt/types';
 import Vue from 'vue';
-import { Context } from '@nuxt/vue-app-edge';
+
 import PressSummary from '~/components/PressSummary.vue';
+import { PressPostSummary } from '~/domains/contentful';
 
 export default Vue.extend({
   components: {
     PressSummary,
+  },
+  data() {
+    return {
+      posts: [] as PressPostSummary[],
+      items: [] as {
+        text: string;
+        to: string;
+        exact: boolean;
+        disabled: boolean;
+      }[],
+    };
   },
   async asyncData(context: Context) {
     const posts = await context.$press.fetchRecently(0, 10);
@@ -51,10 +64,8 @@ export default Vue.extend({
       ],
     };
   },
-  head() {
-    return {
-      title: 'プレスリリース一覧',
-    };
+  head: {
+    title: 'プレスリリース一覧',
   },
 });
 </script>
