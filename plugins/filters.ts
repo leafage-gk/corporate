@@ -1,12 +1,14 @@
-import { Context } from '@nuxt/types';
+import { Plugin } from '@nuxt/types';
 import { Moment } from 'moment';
 import Vue from 'vue';
 
-export default (context: Context) => {
+const plugin: Plugin = ctx => {
   Vue.filter(
     'dateFormat',
     (val: string | number | Date | Moment, format: string): string => {
-      return context.$moment(val).format(format);
+      return ctx.$moment(val).format(format);
     },
   );
 };
+
+export default plugin;

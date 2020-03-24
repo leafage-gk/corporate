@@ -1,19 +1,18 @@
-import { Context } from '@nuxt/types';
+import { Plugin } from '@nuxt/types';
 import * as contentful from 'contentful';
 
 import { PressRepository } from '~/domains/contentful';
 
-export default (
-  context: Context,
-  inject: (name: string, injected: {}) => void,
-) => {
+const plugin: Plugin = (ctx, inject) => {
   const client = contentful.createClient({
-    accessToken: context.env.CTF_CDA_ACCESS_TOKEN,
-    space: context.env.CTF_SPACE_ID,
+    accessToken: ctx.env.CTF_CDA_ACCESS_TOKEN,
+    space: ctx.env.CTF_SPACE_ID,
   });
-  context.$contentful = client;
+  ctx.$contentful = client;
   inject('contentful', client);
   const press = new PressRepository(client);
-  context.$press = press;
+  ctx.$press = press;
   inject('press', press);
 };
+
+export default plugin;

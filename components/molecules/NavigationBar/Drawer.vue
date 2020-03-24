@@ -21,7 +21,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
 
-import { DrawerItem } from './item';
+import { DrawerItem } from '~/config/const';
 
 export default Vue.extend({
   props: {

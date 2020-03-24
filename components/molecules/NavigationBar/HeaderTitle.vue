@@ -1,7 +1,12 @@
 <template>
   <v-toolbar-title>
     <nuxt-link to="/" class="leafage-title">
-      リーフエイジ合同会社
+      <v-img
+        :src="logo"
+        :srcset="logoSet"
+        max-width="60%"
+        alt="リーフエイジ合同会社"
+      />
     </nuxt-link>
   </v-toolbar-title>
 </template>
@@ -9,12 +14,23 @@
 <script lang="ts">
 import Vue from 'vue';
 
-export default Vue.extend({});
+import logo1x from '~/assets/images/leafage-logo_yoko.png';
+import logo2x from '~/assets/images/leafage-logo_yoko@2x.png';
+
+export default Vue.extend({
+  computed: {
+    logo() {
+      return logo1x;
+    },
+    logoSet() {
+      return `${logo1x} 1x, ${logo2x} 2x`;
+    },
+  },
+});
 </script>
 
 <style lang="scss" scoped>
 .leafage-title {
-  color: white;
   text-decoration: none;
   outline: 0;
 }

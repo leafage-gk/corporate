@@ -1,9 +1,9 @@
 import { ContentfulClientApi } from 'contentful';
 import MarkdownIt from 'markdown-it';
 import moment from 'moment';
-import Vue from 'vue';
 
 import { PressRepository } from '~/domains/contentful';
+import { accessorType } from '~/store';
 
 interface InjectedByPlugin {
   $contentful: ContentfulClientApi;
@@ -11,6 +11,7 @@ interface InjectedByPlugin {
   $moment: typeof moment;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload?: any;
+  $accessor: typeof accessorType;
 }
 
 declare module '@nuxt/types' {

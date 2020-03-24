@@ -1,8 +1,8 @@
 <template>
   <v-sheet>
-    <header-pc :items="headerBtnItems" v-if="browser" />
+    <header-pc :items="$accessor.system.config.headerBtnItems" v-if="mdAndUp" />
     <template v-else>
-      <drawer v-model="drawer" :items="drawerItems" />
+      <drawer v-model="drawer" :items="$accessor.system.config.drawerItems" />
       <header-sp v-model="drawer" />
     </template>
   </v-sheet>
@@ -13,24 +13,9 @@ import Vue from 'vue';
 
 import {
   Drawer,
-  DrawerItem,
-  HeaderBtnItem,
   HeaderPc,
   HeaderSp,
 } from '~/components/molecules/NavigationBar';
-
-const drawerItems: DrawerItem[] = [
-  { title: 'TOP', to: '/' },
-  { title: 'プレス', to: '/press' },
-  { title: '会社概要', to: '/company' },
-  { title: 'お問合わせ', to: '/contact' },
-];
-
-const headerBtnItems: HeaderBtnItem[] = [
-  { title: 'プレス', to: '/press' },
-  { title: '会社概要', to: '/company' },
-  { title: 'お問合わせ', to: '/contact' },
-];
 
 export default Vue.extend({
   components: {
@@ -38,23 +23,18 @@ export default Vue.extend({
     HeaderSp,
     HeaderPc,
   },
-  props: {
-    browser: {
-      type: Boolean,
-      required: true,
-    },
-  },
   data() {
     return {
       drawer: false,
+      isMounted: false,
     };
   },
+  mounted() {
+    this.isMounted = true;
+  },
   computed: {
-    drawerItems() {
-      return drawerItems;
-    },
-    headerBtnItems() {
-      return headerBtnItems;
+    mdAndUp(): boolean {
+      return this.isMounted ? this.$vuetify.breakpoint.mdAndUp : true;
     },
   },
 });
