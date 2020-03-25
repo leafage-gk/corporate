@@ -10,13 +10,12 @@
         </v-flex>
       </v-layout>
     </v-img>
-    <v-container>
-      <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
+    <page-container :items="items">
       <div class="grey--text">
         {{ press.publishedAt | dateFormat('YYYY年MM月DD日') }}
       </div>
       <div class="press-body" v-html="$md.render(press.body || '')"></div>
-    </v-container>
+    </page-container>
   </v-content>
 </template>
 
@@ -24,10 +23,14 @@
 import { Context } from '@nuxt/types';
 import Vue from 'vue';
 
-import PressHeader from '~/assets/images/press_header.jpg';
+import PressHeader from '~/assets/images/page_header.jpg';
+import PageContainer from '~/components/molecules/PageContainer.vue';
 import { PressPost } from '~/domains/contentful';
 
 export default Vue.extend({
+  components: {
+    PageContainer,
+  },
   data() {
     return {
       defaultPressHeader: PressHeader,
@@ -53,7 +56,7 @@ export default Vue.extend({
             to: '/',
           },
           {
-            text: 'プレスリリース一覧',
+            text: 'ニュース一覧',
             to: '/press',
             exact: true,
           },
@@ -73,6 +76,7 @@ export default Vue.extend({
       title: (this as any).press.title,
     };
   },
+  layout: 'top',
 });
 </script>
 

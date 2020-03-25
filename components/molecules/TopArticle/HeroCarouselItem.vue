@@ -1,5 +1,5 @@
 <template>
-  <hero-image :src="src">
+  <hero-image :src="src" :srcset="srcset">
     <v-container
       :fluid="mdAndUp"
       height="100%"
@@ -62,6 +62,10 @@ export default Vue.extend({
       required: true,
     },
     src: {
+      type: String,
+      required: true,
+    },
+    srcset: {
       type: String,
       required: true,
     },

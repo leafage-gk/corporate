@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="primary" flat fixed app>
+  <v-app-bar dark color="primary darken-2" flat fixed app>
     <v-app-bar-nav-icon @click="onClickNavIcon" />
     <header-title />
   </v-app-bar>

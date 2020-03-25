@@ -1,93 +1,80 @@
 <template>
   <v-content>
-    <v-container>
-      <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
-      <v-layout align-center justify-center column>
-        <v-subheader><h2>会社概要</h2></v-subheader>
-        <table class="overview">
-          <tbody>
-            <tr>
-              <th>会社名</th>
-              <td>リーフエイジ合同会社</td>
-            </tr>
-            <tr>
-              <th>代表社員</th>
-              <td>杉本 謙仁(スギモト ケント)</td>
-            </tr>
-            <tr>
-              <th>設立</th>
-              <td>2019年1月4日</td>
-            </tr>
-            <tr>
-              <th>顧問税理士</th>
-              <td>Leaf税理士法人</td>
-            </tr>
-            <tr>
-              <th>業務内容</th>
-              <td>
-                <ul>
-                  <li>
-                    コンピュータシステムの企画、開発、販売及び保守に関する業務
-                  </li>
-                  <li>
-                    ウェブサイトの企画、設計、開発、運営及び販売
-                  </li>
-                  <li>
-                    IT化推進事業にまつわるベンダーコントロール
-                  </li>
-                  <li>
-                    インターネットを利用した各種情報提供サービス並びに通信販売業務
-                  </li>
-                  <li>
-                    書籍及び印刷物の企画、編集、出版並びに販売
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <th>沿革</th>
-              <td>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>2019年1月4日</td>
-                      <td>東京都世田谷区にて、リーフエイジ合同会社を設立</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <th>所在地</th>
-              <td>
-                東京都世田谷区大原２－２７－１１　ラピス代田橋４F
-              </td>
-            </tr>
-            <tr>
-              <th>連絡先</th>
-              <td>
-                contact@leafage.co.jp
-              </td>
-            </tr>
-            <tr>
-              <th>主要取引先</th>
-              <td>
-                <ul>
-                  <li>株式会社NEOPA</li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </v-layout>
-    </v-container>
+    <page-container :items="items">
+      <v-container fluid class="ma-4">
+        <v-row justify="start" align="center">
+          <v-subheader><h2>会社概要</h2></v-subheader>
+        </v-row>
+        <v-row justify="center" align="center">
+          <table class="overview">
+            <tbody>
+              <tr>
+                <th>会社名</th>
+                <td>リーフエイジ合同会社</td>
+              </tr>
+              <tr>
+                <th>設立</th>
+                <td>2019年1月4日</td>
+              </tr>
+              <tr>
+                <th>代表</th>
+                <td>杉本 謙仁(スギモト ケント)</td>
+              </tr>
+              <tr>
+                <th>所在地</th>
+                <td>
+                  東京都世田谷区大原２－２７－１１　ラピス代田橋４F
+                </td>
+              </tr>
+              <tr>
+                <th>連絡先</th>
+                <td>
+                  contact@leafage.co.jp
+                </td>
+              </tr>
+              <tr>
+                <th>顧問税理士</th>
+                <td>Leaf税理士法人</td>
+              </tr>
+              <tr>
+                <th>業務内容</th>
+                <td>
+                  <ul>
+                    <li>
+                      コンピュータシステムの企画、開発、及び保守に関する業務
+                    </li>
+                    <li>
+                      ウェブサイト、アプリケーション制作
+                    </li>
+                    <li>
+                      ホームページ制作（デザイン、コーディング）
+                    </li>
+                    <li>
+                      インターネットを利用した各種情報提供サービス
+                    </li>
+                    <li>
+                      書籍及び印刷物の企画、編集、出版並びに販売
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </v-row>
+      </v-container>
+    </page-container>
   </v-content>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 
+import PageContainer from '~/components/molecules/PageContainer.vue';
+
 export default Vue.extend({
+  components: {
+    PageContainer,
+  },
   data() {
     return {
       items: [
@@ -109,28 +96,19 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/style/variables.scss';
-
-.subheader {
-  margin: 10px;
-  // color: $grey.darken-3;
-}
-
 table.overview {
   margin: 10px;
-  // color: $grey.darken-3;
+  color: map-get($grey, darken-3);
   border-collapse: collapse;
-  // border: 1px solid $lime.lighten-5;
   > tbody > tr {
+    border-bottom: 1px solid map-get($grey, lighten-2);
     > th,
     > td {
       padding: 10px;
-      // border: 1px solid $lime.lighten-3;
     }
     > th {
-      color: white;
+      color: map-get($cyan, base);
       text-align: right;
-      // background: $light-green.darken-1;
     }
   }
 }

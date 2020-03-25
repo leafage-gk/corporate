@@ -5,6 +5,7 @@
     :aspect-ratio="smAndUp ? 16 / 7 : undefined"
     :height="!smAndUp ? 300 : undefined"
     :src="src"
+    :srcset="srcset"
   >
     <slot />
   </v-img>
@@ -16,6 +17,10 @@ import Vue from 'vue';
 export default Vue.extend({
   props: {
     src: {
+      type: String,
+      required: true,
+    },
+    srcset: {
       type: String,
       required: true,
     },
