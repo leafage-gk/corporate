@@ -1,6 +1,11 @@
 <template>
-  <v-navigation-drawer :value="value" @input="v => $emit('input', v)" fixed app>
-    <v-list>
+  <v-navigation-drawer
+    :value="value"
+    @input="(v) => $emit('input', v)"
+    fixed
+    app
+  >
+    <v-list dense nav>
       <v-list-item
         v-for="(item, index) in items"
         :key="index"
@@ -8,6 +13,9 @@
         router
         exact
       >
+        <v-list-item-icon>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-item-icon>
         <v-list-item-content>
           <v-list-item-title>
             {{ item.title }}

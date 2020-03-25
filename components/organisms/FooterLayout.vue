@@ -5,11 +5,12 @@
         height="200"
         gradient="to top, rgba(100,115,201,.33), rgba(25,32,72,.7)"
         class="align-center"
-        :src="require('~/assets/images/footer.jpg')"
+        :src="footerImage.src"
+        :srcset="footerImage.srcset"
       >
         <v-card-text>
           <p :class="footerText">
-            最先端のプログラミングからWebデザインまで
+            最先端のシステム構築からWebデザインまで
           </p>
           <p :class="footerText">
             Webに関することなら当社へお気軽にご相談ください
@@ -32,10 +33,17 @@
 <script lang="ts">
 import Vue from 'vue';
 
+import footerImage1x from '~/assets/images/footer.jpg';
+import footerImage2x from '~/assets/images/footer@2x.jpg';
+
 export default Vue.extend({
   data() {
     return {
       isMounted: false,
+      footerImage: {
+        src: footerImage1x,
+        srcset: `${footerImage1x} 1x, ${footerImage2x} 2x`,
+      },
     };
   },
   mounted() {

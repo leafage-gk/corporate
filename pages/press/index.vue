@@ -1,11 +1,12 @@
 <template>
   <v-content>
-    <v-container>
-      <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
-      <v-layout column>
-        <v-subheader><h2>プレスリリース一覧</h2></v-subheader>
-        <no-ssr>
-          <v-flex v-bind:key="item.id" v-for="(item, index) in posts">
+    <page-container :items="items">
+      <v-container fluid>
+        <v-row justify="start" align="center" class="ma-4">
+          <v-subheader><h2>ニュース一覧</h2></v-subheader>
+        </v-row>
+        <client-only placeholder="Loading...">
+          <v-row class="my-3" v-for="(item, index) in posts" :key="index">
             <press-summary
               :to="item.linkTo"
               :href="item.linkHref"
@@ -14,11 +15,10 @@
               :body="item.summary"
               :published-at="item.publishedAt"
             />
-            <v-divider v-if="index < posts.length" />
-          </v-flex>
-        </no-ssr>
-      </v-layout>
-    </v-container>
+          </v-row>
+        </client-only>
+      </v-container>
+    </page-container>
   </v-content>
 </template>
 
@@ -26,11 +26,13 @@
 import { Context } from '@nuxt/types';
 import Vue from 'vue';
 
-import PressSummary from '~/components/PressSummary.vue';
+import PageContainer from '~/components/molecules/PageContainer.vue';
+import PressSummary from '~/components/molecules/PressSummary.vue';
 import { PressPostSummary } from '~/domains/contentful';
 
 export default Vue.extend({
   components: {
+    PageContainer,
     PressSummary,
   },
   data() {
@@ -56,7 +58,7 @@ export default Vue.extend({
           disabled: false,
         },
         {
-          text: 'プレスリリース一覧',
+          text: 'ニュース一覧',
           to: '/press',
           exact: true,
           disabled: true,
@@ -65,7 +67,7 @@ export default Vue.extend({
     };
   },
   head: {
-    title: 'プレスリリース一覧',
+    title: 'ニュース一覧',
   },
 });
 </script>

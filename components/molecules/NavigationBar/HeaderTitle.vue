@@ -18,13 +18,11 @@ import logo1x from '~/assets/images/leafage-logo_yoko.png';
 import logo2x from '~/assets/images/leafage-logo_yoko@2x.png';
 
 export default Vue.extend({
-  computed: {
-    logo() {
-      return logo1x;
-    },
-    logoSet() {
-      return `${logo1x} 1x, ${logo2x} 2x`;
-    },
+  data() {
+    return {
+      logo: logo1x,
+      logoSet: `${logo1x} 1x, ${logo2x} 2x`,
+    };
   },
 });
 </script>
