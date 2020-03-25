@@ -1,7 +1,7 @@
 {
   "name": "corporate",
   "version": "1.1.0",
-  "description": "TypeScriptで紡ぐ次世代のWeb制作会社、リーフエイジ合同会社 ",
+  "description": "Webサービス、モバイルアプリの受託開発、リーフエイジ合同会社",
   "author": "tnkgs <kento@kt-one.jp>",
   "private": true,
   "license": "UNLICENSED",

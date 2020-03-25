@@ -68,7 +68,7 @@
                 'font-weight-medium': true,
               }"
             >
-              Webサービス、モバイルアプリの開発受託
+              Webサービス、モバイルアプリの受託開発
             </v-card-title>
             <v-card-text :class="mdAndUp ? 'title' : 'subtitle-1'">
               <ul>
