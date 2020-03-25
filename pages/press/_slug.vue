@@ -11,10 +11,14 @@
       </v-layout>
     </v-img>
     <page-container :items="items">
-      <div class="grey--text">
-        {{ press.publishedAt | dateFormat('YYYY年MM月DD日') }}
-      </div>
-      <div class="press-body" v-html="$md.render(press.body || '')"></div>
+      <v-container fluid class="ma-4">
+        <v-row class="grey--text pa-2">
+          {{ press.publishedAt | dateFormat('YYYY年MM月DD日') }}
+        </v-row>
+        <v-row>
+          <div class="pa-2" v-html="$md.render(press.body || '')" />
+        </v-row>
+      </v-container>
     </page-container>
   </v-content>
 </template>
