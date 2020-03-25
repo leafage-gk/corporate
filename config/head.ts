@@ -27,11 +27,11 @@ const head: Configuration['head'] = {
       property: 'og:description',
       content: pkg.description,
     },
-    // {
-    //   hid: 'og:image',
-    //   property: 'og:image',
-    //   content: 'https://leafage.co.jp/images/leafage.png',
-    // },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content: 'https://leafage.co.jp/ogp.jpg',
+    },
     {
       hid: 'og:site_name',
       property: 'og:site_name',
