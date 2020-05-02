@@ -9,7 +9,7 @@
               <v-parallax
                 :class="{ 'on-hover': hover }"
                 :height="mdAndUp ? 300 : 200"
-                :src="require('~/assets/images/top/mission.jpg')"
+                :src="require('~/assets/images/top/mission.webp')"
               >
                 <v-overlay absolute z-index="-1" :opacity="hover ? 0.2 : 0.4" />
                 <v-card-title
@@ -55,7 +55,7 @@
       <v-row>
         <v-col cols="12" md="4">
           <v-img
-            :src="require('~/assets/images/solutions/development.jpg')"
+            :src="require('~/assets/images/solutions/development@600w.webp')"
             :aspect-ratio="mdAndUp ? 1 : 2"
           />
         </v-col>
@@ -119,7 +119,7 @@
         </v-col>
         <v-col cols="12" md="4" order="2">
           <v-img
-            :src="require('~/assets/images/solutions/mentor.jpg')"
+            :src="require('~/assets/images/solutions/mentor@600w.webp')"
             :aspect-ratio="mdAndUp ? 1 : 2"
           />
         </v-col>
@@ -127,7 +127,7 @@
       <v-row>
         <v-col cols="12" md="4">
           <v-img
-            :src="require('~/assets/images/solutions/infra.jpg')"
+            :src="require('~/assets/images/solutions/infra@600w.webp')"
             :aspect-ratio="mdAndUp ? 1 : 2"
           />
         </v-col>
@@ -193,7 +193,7 @@
         </v-col>
         <v-col cols="12" md="4" order="2">
           <v-img
-            :src="require('~/assets/images/solutions/bpm.jpg')"
+            :src="require('~/assets/images/solutions/bpm@600w.webp')"
             :aspect-ratio="mdAndUp ? 1 : 2"
           />
         </v-col>
@@ -205,14 +205,12 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import { TopHero } from '~/components/molecules/TopArticle';
-
 export default Vue.extend({
   components: {
-    TopHero,
+    TopHero: () => import('~/components/molecules/TopArticle/TopHero.vue'),
   },
   head: {
-    title: '最先端のサイト制作のプロ',
+    title: '特急Web開発',
   },
   data() {
     return {

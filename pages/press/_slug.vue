@@ -27,13 +27,12 @@
 import { Context } from '@nuxt/types';
 import Vue from 'vue';
 
-import PressHeader from '~/assets/images/page_header.jpg';
-import PageContainer from '~/components/molecules/PageContainer.vue';
+import PressHeader from '~/assets/images/page_header@1280w.webp';
 import { PressPost } from '~/domains/contentful';
 
 export default Vue.extend({
   components: {
-    PageContainer,
+    PageContainer: () => import('~/components/molecules/PageContainer.vue'),
   },
   data() {
     return {

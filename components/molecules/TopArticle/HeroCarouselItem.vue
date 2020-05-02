@@ -1,5 +1,5 @@
 <template>
-  <hero-image :src="src" :srcset="srcset">
+  <hero-image :srcs="srcs">
     <v-container
       :fluid="mdAndUp"
       height="100%"
@@ -40,7 +40,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { PropType } from 'vue';
+
+import { ResponsiveImageSrcs } from '~/hooks/images';
 
 import HeroImage from './HeroImage.vue';
 
@@ -61,12 +63,8 @@ export default Vue.extend({
       type: String,
       required: true,
     },
-    src: {
-      type: String,
-      required: true,
-    },
-    srcset: {
-      type: String,
+    srcs: {
+      type: Object as PropType<ResponsiveImageSrcs>,
       required: true,
     },
     to: {

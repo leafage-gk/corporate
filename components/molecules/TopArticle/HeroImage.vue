@@ -1,27 +1,29 @@
 <template>
-  <v-img
-    class="align-center"
+  <responsive-image
+    align="center"
     gradient="to bottom, rgba(100,115,201,.33), rgba(25,32,72,.7)"
-    :aspect-ratio="smAndUp ? 16 / 7 : undefined"
-    :height="!smAndUp ? 300 : undefined"
-    :src="src"
-    :srcset="srcset"
+    :with-aspect-ratio="smAndUp"
+    :aspect-ratio="16 / 7"
+    :height="300"
+    :srcs="srcs"
   >
     <slot />
-  </v-img>
+  </responsive-image>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { PropType } from 'vue';
+
+import ResponsiveImage from '~/components/atoms/ResponsiveImage.vue';
+import { ResponsiveImageSrcs } from '~/hooks/images';
 
 export default Vue.extend({
+  components: {
+    ResponsiveImage,
+  },
   props: {
-    src: {
-      type: String,
-      required: true,
-    },
-    srcset: {
-      type: String,
+    srcs: {
+      type: Object as PropType<ResponsiveImageSrcs>,
       required: true,
     },
   },

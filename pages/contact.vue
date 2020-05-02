@@ -147,15 +147,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import VueRecaptcha from 'vue-recaptcha';
 
-import PageContainer from '~/components/molecules/PageContainer.vue';
 import { VuetifyForm } from '~/types/vuetify';
 
 export default Vue.extend({
   components: {
-    PageContainer,
-    VueRecaptcha,
+    PageContainer: () => import('~/components/molecules/PageContainer.vue'),
+    VueRecaptcha: () => import('vue-recaptcha'),
   },
   data() {
     return {

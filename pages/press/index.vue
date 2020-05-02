@@ -26,14 +26,12 @@
 import { Context } from '@nuxt/types';
 import Vue from 'vue';
 
-import PageContainer from '~/components/molecules/PageContainer.vue';
-import PressSummary from '~/components/molecules/PressSummary.vue';
 import { PressPostSummary } from '~/domains/contentful';
 
 export default Vue.extend({
   components: {
-    PageContainer,
-    PressSummary,
+    PageContainer: () => import('~/components/molecules/PageContainer.vue'),
+    PressSummary: () => import('~/components/molecules/PressSummary.vue'),
   },
   data() {
     return {

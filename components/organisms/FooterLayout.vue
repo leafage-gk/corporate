@@ -1,12 +1,11 @@
 <template>
   <v-footer padless>
     <v-card flat tile width="100%" class="white--text text-center">
-      <v-img
-        height="200"
+      <responsive-image
+        :height="200"
         gradient="to top, rgba(100,115,201,.33), rgba(25,32,72,.7)"
-        class="align-center"
-        :src="footerImage.src"
-        :srcset="footerImage.srcset"
+        align="center"
+        :srcs="footer"
       >
         <v-card-text>
           <p :class="footerText">
@@ -19,7 +18,7 @@
         <v-btn :x-large="mdAndUp" text color="accent lighten-1">
           お問い合わせ
         </v-btn>
-      </v-img>
+      </responsive-image>
       <v-card-text class="secondary darken-4 white--text">
         <p class="ma-0">
           &copy; {{ $accessor.system.config.company }}
@@ -33,17 +32,17 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import footerImage1x from '~/assets/images/footer.jpg';
-import footerImage2x from '~/assets/images/footer@2x.jpg';
+import ResponsiveImage from '~/components/atoms/ResponsiveImage.vue';
+import footer from '~/hooks/images/footer';
 
 export default Vue.extend({
+  components: {
+    ResponsiveImage,
+  },
   data() {
     return {
       isMounted: false,
-      footerImage: {
-        src: footerImage1x,
-        srcset: `${footerImage1x} 1x, ${footerImage2x} 2x`,
-      },
+      footer,
     };
   },
   mounted() {

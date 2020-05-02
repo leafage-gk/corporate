@@ -23,7 +23,7 @@
               <tr>
                 <th>所在地</th>
                 <td>
-                  東京都世田谷区大原２－２７－１１　ラピス代田橋４F
+                  東京都世田谷区大原2丁目27-11-404号
                 </td>
               </tr>
               <tr>
@@ -69,11 +69,9 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import PageContainer from '~/components/molecules/PageContainer.vue';
-
 export default Vue.extend({
   components: {
-    PageContainer,
+    PageContainer: () => import('~/components/molecules/PageContainer.vue'),
   },
   data() {
     return {

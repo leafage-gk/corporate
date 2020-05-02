@@ -7,7 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "nuxt-ts dev",
-    "generate": "nuxt-ts generate"
+    "generate": "nuxt-ts generate",
+    "generate:webp": "gulp webp"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^13.4.0",
@@ -35,6 +36,9 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-simple-import-sort": "^5.0.2",
     "eslint-plugin-vue": "^6.2.2",
+    "gm": "^1.23.1",
+    "gulp": "^4.0.2",
+    "gulp-webp": "^4.0.1",
     "nuxt-webfontloader": "^1.1.0",
     "prettier": "^2.0.1",
     "sass": "^1.26.3",
@@ -46,6 +50,7 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-prettier": "^1.1.2",
     "stylelint-scss": "^3.16.0",
+    "through2": "^3.0.1",
     "typescript": "^3.8.3"
   }
 }
