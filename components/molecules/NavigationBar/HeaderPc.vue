@@ -5,7 +5,10 @@
     <v-toolbar-items>
       <v-btn
         text
-        :class="item.accent ? 'accent-header-btn' : 'header-btn'"
+        :class="{
+          'accent-header-btn': item.accent,
+          'header-btn': !item.accent,
+        }"
         active-class="active-header-btn"
         v-for="(item, index) in items"
         :key="index"

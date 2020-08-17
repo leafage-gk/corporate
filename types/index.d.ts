@@ -1,17 +1,12 @@
-import { ContentfulClientApi } from 'contentful';
-import MarkdownIt from 'markdown-it';
 import moment from 'moment';
 
-import { PressRepository } from '~/domains/contentful';
-import { accessorType } from '~/store';
+import { companyRepositoryFactory } from '~/domains/company';
+import { pressRepositoryFactory } from '~/domains/press';
 
 interface InjectedByPlugin {
-  $contentful: ContentfulClientApi;
-  $press: PressRepository;
+  $press: ReturnType<typeof pressRepositoryFactory>;
+  $company: ReturnType<typeof companyRepositoryFactory>;
   $moment: typeof moment;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  payload?: any;
-  $accessor: typeof accessorType;
 }
 
 declare module '@nuxt/types' {
@@ -19,7 +14,5 @@ declare module '@nuxt/types' {
 }
 
 declare module 'vue/types/vue' {
-  interface Vue extends InjectedByPlugin {
-    $md: MarkdownIt;
-  }
+  interface Vue extends InjectedByPlugin {}
 }

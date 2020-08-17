@@ -116,7 +116,10 @@ export default Vue.extend({
     },
   },
   async asyncData(context: Context) {
-    const press = await context.$press.getBySlug(context.params['slug']);
+    const press = await context.$press.getById(
+      context.params['id'],
+      context.query['draftKey'] as string | undefined,
+    );
     if (press) {
       return {
         press,

@@ -55,14 +55,14 @@
         </form>
       </v-card>
     </v-dialog>
-    <page-container :items="items">
-      <v-container fluid class="ma-4">
-        <v-row justify="center" align="center">
-          <v-subheader><h2>お問合せ</h2></v-subheader>
-        </v-row>
+    <page-container :items="items" justify="center">
+      <v-col cols="12" lg="8" xl="6">
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-row justify="center" align="center">
-            <v-col>
+            <v-subheader><h2>お問合せ</h2></v-subheader>
+          </v-row>
+          <v-row align="center">
+            <v-col cols="12">
               <v-select
                 name="type"
                 v-model="select"
@@ -70,77 +70,94 @@
                 :rules="[(v) => !!v || '必須項目です。']"
                 label="お問合せ種類"
                 required
+                dense
               ></v-select>
-
+            </v-col>
+            <v-col cols="12" sm="6">
               <v-text-field
                 name="name"
                 v-model="name"
                 :rules="nameRules"
-                label="お名前"
-                placeholder="例：令和 太郎"
+                label="姓"
                 counter="20"
                 color="primary"
+                hide-details
                 required
+                dense
               ></v-text-field>
-
+            </v-col>
+            <v-col cols="12" sm="6">
               <v-text-field
                 name="kana"
                 v-model="kana"
                 :rules="kanaRules"
-                label="ふりがな"
-                placeholder="例：れいわ たろう"
+                label="名"
                 counter="20"
+                hide-details
                 required
+                dense
               ></v-text-field>
-
+            </v-col>
+            <v-col cols="12" sm="6">
               <v-text-field
                 name="email"
                 v-model="email"
                 :rules="emailRules"
                 label="メールアドレス"
-                placeholder="例：rtaro@leafage.co.jp"
                 counter="100"
+                hide-details
                 required
+                dense
+                prepend-icon="email"
               ></v-text-field>
-
-              <v-text-field
-                name="organization"
-                v-model="organization"
-                label="所属名・会社名"
-                placeholder="例：リーフエイジ合同会社"
-                counter="20"
-              ></v-text-field>
-
+            </v-col>
+            <v-col cols="12" sm="6">
               <v-text-field
                 name="phone"
                 v-model="phone"
                 :rules="phoneRules"
                 label="電話番号"
-                placeholder="例：03-xxxx-xxxx"
                 counter="20"
+                hide-details
+                dense
+                prepend-icon="phone"
               ></v-text-field>
-
+            </v-col>
+            <v-col cols="12">
+              <v-text-field
+                name="organization"
+                v-model="organization"
+                label="所属名・会社名"
+                counter="20"
+                hide-details
+                dense
+                prepend-icon="business"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12">
               <v-textarea
                 name="content"
                 v-model="content"
-                :rules="contentRules"
                 label="お問合せ内容"
                 counter="5000"
+                hide-details
+                dense
               ></v-textarea>
             </v-col>
           </v-row>
           <v-row justify="center" align="center">
             <v-btn
               :disabled="!valid"
-              color="success"
-              class="text-right"
+              large
+              color="secondary"
+              class="ma-10 px-10"
               @click="validate"
             >
               確認
             </v-btn>
           </v-row>
         </v-form>
-      </v-container>
+      </v-col>
     </page-container>
   </v-content>
 </template>
@@ -177,7 +194,6 @@ export default Vue.extend({
       select: '',
       types: ['案件のご相談・ご依頼', 'パートナー募集', 'その他お問合せ'],
       content: '',
-      contentRules: [(v: string) => !!v || '必須項目です。'],
       dialog: false,
       items: [
         {

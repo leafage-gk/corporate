@@ -1,23 +1,25 @@
 <template>
   <v-content>
     <page-container :items="items">
-      <v-container fluid>
+      <v-col cols="12" v-if="posts">
         <v-row justify="start" align="center" class="ma-4">
-          <v-subheader><h2>ニュース一覧</h2></v-subheader>
+          <v-subheader><h2>ニュース</h2></v-subheader>
         </v-row>
-        <client-only placeholder="Loading...">
-          <v-row class="my-3" v-for="(item, index) in posts" :key="index">
-            <press-summary
-              :to="item.linkTo"
-              :href="item.linkHref"
-              :image="item.summaryImage"
-              :title="item.title"
-              :body="item.summary"
-              :published-at="item.publishedAt"
-            />
-          </v-row>
-        </client-only>
-      </v-container>
+        <v-row
+          class="my-3"
+          v-for="(item, index) in posts.contents"
+          :key="index"
+        >
+          <press-summary
+            :slug="item.slug"
+            :image="item.thumbnail ? item.thumbnail.url : undefined"
+            :title="item.title"
+            :summary="item.summary"
+            :press-type="item.type.title"
+            :published-at="item.publishedAt"
+          />
+        </v-row>
+      </v-col>
     </page-container>
   </v-content>
 </template>
@@ -26,7 +28,7 @@
 import { Context } from '@nuxt/types';
 import Vue from 'vue';
 
-import { PressPostSummary } from '~/domains/contentful';
+import { PressPostSummaryResponse } from '~/domains/press';
 
 export default Vue.extend({
   components: {
@@ -35,7 +37,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      posts: [] as PressPostSummary[],
+      posts: undefined as PressPostSummaryResponse | undefined,
       items: [] as {
         text: string;
         to: string;
@@ -45,7 +47,7 @@ export default Vue.extend({
     };
   },
   async asyncData(context: Context) {
-    const posts = await context.$press.fetchRecently(0, 10);
+    const posts = await context.$press.fetchRecently('2u9ctzqlxi', 0, 10);
     return {
       posts,
       items: [
@@ -56,8 +58,8 @@ export default Vue.extend({
           disabled: false,
         },
         {
-          text: 'ニュース一覧',
-          to: '/press',
+          text: 'ニュース',
+          to: '/news',
           exact: true,
           disabled: true,
         },
@@ -65,7 +67,7 @@ export default Vue.extend({
     };
   },
   head: {
-    title: 'ニュース一覧',
+    title: 'ニュース',
   },
 });
 </script>

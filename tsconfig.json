@@ -21,6 +21,7 @@
     "typeRoots": ["types", "node_modules/@types"],
     "types": [
       "@nuxt/types",
+      "@nuxtjs/axios",
       "@nuxtjs/moment",
       "@nuxtjs/vuetify"
     ]

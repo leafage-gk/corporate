@@ -1,11 +1,13 @@
 <template>
-  <v-container fluid class="pa-0">
+  <v-container fluid>
     <v-row no-gutters justify="center" align="center">
-      <v-col cols="12" md="8">
+      <v-col cols="12" sm="10" md="8">
         <v-row justify="start" align="center">
-          <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
+          <v-col cols="12">
+            <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
+          </v-col>
         </v-row>
-        <v-row justify="start" align="center">
+        <v-row :justify="justify" align="center">
           <slot />
         </v-row>
       </v-col>
@@ -21,6 +23,10 @@ export default Vue.extend({
     items: {
       type: Array,
       required: true,
+    },
+    justify: {
+      type: String,
+      default: 'start',
     },
   },
 });

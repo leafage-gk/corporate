@@ -15,13 +15,13 @@
             Webに関することなら当社へお気軽にご相談ください
           </p>
         </v-card-text>
-        <v-btn :x-large="mdAndUp" text color="accent lighten-1">
+        <v-btn :x-large="mdAndUp" text color="accent lighten-1" to="/contact">
           お問い合わせ
         </v-btn>
       </responsive-image>
       <v-card-text class="secondary darken-4 white--text">
         <p class="ma-0">
-          &copy; {{ $accessor.system.config.company }}
+          &copy; {{ company }}
           {{ new Date().getFullYear() }}
         </p>
       </v-card-text>
@@ -33,6 +33,7 @@
 import Vue from 'vue';
 
 import ResponsiveImage from '~/components/atoms/ResponsiveImage.vue';
+import constData from '~/config/const';
 import footer from '~/hooks/images/footer';
 
 export default Vue.extend({
@@ -49,6 +50,9 @@ export default Vue.extend({
     this.isMounted = true;
   },
   computed: {
+    company(): string {
+      return constData.company;
+    },
     mdAndUp(): boolean {
       return this.isMounted ? this.$vuetify.breakpoint.mdAndUp : true;
     },
