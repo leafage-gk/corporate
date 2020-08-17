@@ -33,7 +33,7 @@
 import Vue from 'vue';
 
 import ResponsiveImage from '~/components/atoms/ResponsiveImage.vue';
-import constData from '~/config/const';
+import * as constData from '~/config/const';
 import footer from '~/hooks/images/footer';
 
 export default Vue.extend({

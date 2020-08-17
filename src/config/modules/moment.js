@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   defaultLocale: 'ja',
   locales: ['ja'],
 };

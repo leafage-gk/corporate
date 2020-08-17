@@ -23,7 +23,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
 
-import { HeaderBtnItem } from '~/config/const';
+import { HeaderBtnItem } from '~/types/components';
 
 import HeaderTitle from './HeaderTitle.vue';
 

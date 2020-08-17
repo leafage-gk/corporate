@@ -9,7 +9,7 @@
               <v-parallax
                 :class="{ 'on-hover': hover }"
                 :height="mdAndUp ? 300 : 200"
-                :src="require('~/assets/images/top/mission.webp')"
+                :src="require('~/assets/images/top/mission.webp').default"
               >
                 <v-overlay absolute z-index="-1" :opacity="hover ? 0.2 : 0.4" />
                 <v-card-title
@@ -90,9 +90,7 @@
           <v-row>
             <v-col cols="12" md="4">
               <v-img
-                :src="
-                  require('~/assets/images/solutions/development@600w.webp')
-                "
+                :src="developmentImages.src600w"
                 :aspect-ratio="mdAndUp ? 1 : 2"
               />
             </v-col>
@@ -156,7 +154,7 @@
             </v-col>
             <v-col cols="12" md="4" order="2">
               <v-img
-                :src="require('~/assets/images/solutions/mentor@600w.webp')"
+                :src="mentorImages.src600w"
                 :aspect-ratio="mdAndUp ? 1 : 2"
               />
             </v-col>
@@ -164,7 +162,7 @@
           <v-row>
             <v-col cols="12" md="4">
               <v-img
-                :src="require('~/assets/images/solutions/infra@600w.webp')"
+                :src="infraImages.src600w"
                 :aspect-ratio="mdAndUp ? 1 : 2"
               />
             </v-col>
@@ -229,10 +227,7 @@
               </v-card>
             </v-col>
             <v-col cols="12" md="4" order="2">
-              <v-img
-                :src="require('~/assets/images/solutions/bpm@600w.webp')"
-                :aspect-ratio="mdAndUp ? 1 : 2"
-              />
+              <v-img :src="bpmImages.src600w" :aspect-ratio="mdAndUp ? 1 : 2" />
             </v-col>
           </v-row>
         </v-col>
@@ -245,6 +240,10 @@
 import Vue from 'vue';
 
 import { NewsPost } from '~/domains/press';
+import bpmImages from '~/hooks/images/solutions/bpm';
+import developmentImages from '~/hooks/images/solutions/development';
+import infraImages from '~/hooks/images/solutions/infra';
+import mentorImages from '~/hooks/images/solutions/mentor';
 
 export default Vue.extend({
   components: {
@@ -257,6 +256,10 @@ export default Vue.extend({
     return {
       isMounted: false,
       news: [] as NewsPost[],
+      bpmImages,
+      developmentImages,
+      infraImages,
+      mentorImages,
     };
   },
   async asyncData(context) {

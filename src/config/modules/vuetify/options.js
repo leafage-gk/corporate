@@ -1,7 +1,6 @@
-import { UserVuetifyPreset } from 'vuetify';
-import colors from 'vuetify/es5/util/colors';
+const colors = require('vuetify/es5/util/colors').default;
 
-const preset: UserVuetifyPreset = {
+module.exports = {
   theme: {
     dark: false,
     themes: {
@@ -17,5 +16,3 @@ const preset: UserVuetifyPreset = {
     },
   },
 };
-
-export default preset;

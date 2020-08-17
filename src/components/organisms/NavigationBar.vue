@@ -16,7 +16,7 @@ import {
   HeaderPc,
   HeaderSp,
 } from '~/components/molecules/NavigationBar';
-import constData from '~/config/const';
+import * as constData from '~/config/const';
 
 export default Vue.extend({
   components: {

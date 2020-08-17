@@ -1,9 +1,10 @@
-import axios from 'axios';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const axios = require('axios');
 
-import config from '../const';
-import env from '../env';
+const config = require('../const');
+const env = require('../env');
 
-export default {
+module.exports = {
   hostname: config.url,
   gzip: true,
   async routes() {
@@ -16,8 +17,7 @@ export default {
         'X-API-KEY': env.MICROCMS_X_API_KEY,
       },
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return presses.data.contents.map((item: any) => {
+    return presses.data.contents.map((item) => {
       return {
         url: `/press/${item.slug}`,
         lastmod: item.updatedAt,

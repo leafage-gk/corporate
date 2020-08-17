@@ -1,10 +1,9 @@
-import { Configuration } from '@nuxt/types';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const pkg = require('../../package.json');
+const config = require('./const');
 
-import pkg from '../package.json';
-import config from './const';
-
-const head: Configuration['head'] = {
-  link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+module.exports = {
+  link: [{ rel: 'icon', type: 'image/x-icon', href: '/static/favicon.ico' }],
   meta: [
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -30,7 +29,7 @@ const head: Configuration['head'] = {
     {
       hid: 'og:image',
       property: 'og:image',
-      content: 'https://leafage.co.jp/ogp.jpg',
+      content: 'https://leafage.co.jp/static/ogp.jpg',
     },
     {
       hid: 'og:site_name',
@@ -49,5 +48,3 @@ const head: Configuration['head'] = {
   titleTemplate: config.titleTemplate,
   title: config.company,
 };
-
-export default head;

@@ -29,7 +29,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
 
-import { DrawerItem } from '~/config/const';
+import { DrawerItem } from '~/types/components';
 
 export default Vue.extend({
   props: {
