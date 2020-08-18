@@ -16,11 +16,12 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"]
+      "~/*": ["./src/*"]
     },
     "typeRoots": ["types", "node_modules/@types"],
     "types": [
       "@nuxt/types",
+      "@nuxtjs/axios",
       "@nuxtjs/moment",
       "@nuxtjs/vuetify"
     ]
