@@ -3,12 +3,7 @@ module.exports = {
   titleTemplate: (chunk) =>
     chunk ? `${chunk} | リーフエイジ合同会社` : 'リーフエイジ合同会社',
   url: 'https://leafage.co.jp',
-  keywords: [
-    'Web受託開発',
-    'ネイティブアプリ開発',
-    'サイト制作',
-    'モバイルサイト制作',
-  ],
+  keywords: ['Web制作', 'LP制作', '広告運用'],
   drawerItems: [
     { title: 'TOP', to: '/', icon: 'home' },
     { title: '会社概要', to: '/company', icon: 'business' },

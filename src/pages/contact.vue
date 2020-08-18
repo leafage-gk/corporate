@@ -2,11 +2,7 @@
   <v-main>
     <v-dialog v-model="dialog" width="800">
       <v-card>
-        <form
-          name="contact"
-          :action="actionUrl"
-          method="POST"
-        >
+        <form name="contact" :action="actionUrl" method="POST">
           <v-card-title class="headline grey lighten-2" primary-title>
             お問合せ内容確認
           </v-card-title>
@@ -16,7 +12,11 @@
                 <v-col cols="5" md="4">
                   <p class="font-weight-bold text-right">{{ item.label }}</p>
                 </v-col>
-                <v-col cols="7" md="8" style="word-wrap: break-word; white-space: pre-line;">
+                <v-col
+                  cols="7"
+                  md="8"
+                  style="word-wrap: break-word; white-space: pre-line;"
+                >
                   {{ item.value }}
                 </v-col>
               </v-row>
@@ -44,7 +44,12 @@
               name="captcha_settings"
               value='{"keyname":"leafage","fallback":"true","orgId":"00D2x00000750Zd","ts":""}'
             />
-            <input v-if="actionType === 'case'" type=hidden name="orgid" value="00D2x00000750Zd" />
+            <input
+              v-if="actionType === 'case'"
+              type="hidden"
+              name="orgid"
+              value="00D2x00000750Zd"
+            />
             <input v-else type="hidden" name="oid" value="00D2x00000750Zd" />
             <input
               type="hidden"
@@ -220,7 +225,7 @@ export default Vue.extend({
       ],
       recaptchaKey: process.env.SITE_RECAPTCHA_KEY,
       timestamp: null as NodeJS.Timeout | null,
-      scripts: [] as { innerHTML: string; type: string; src: string; }[],
+      scripts: [] as { innerHTML: string; type: string; src: string }[],
     };
   },
   computed: {
@@ -371,13 +376,38 @@ export default Vue.extend({
         }
       };
       this.timestamp = setInterval(timestamp, 500);
-    }
+    },
   },
   head() {
     return {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       script: (this as any).scripts,
       title: 'お問合せ',
+      link: [
+        {
+          rel: 'canonical',
+          href: 'https://leafage.co.jp/contact',
+          id: 'canonical',
+        },
+      ],
+      meta: [
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://leafage.co.jp/contact',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'お問合わせ',
+        },
+        {
+          hid: 'twitter:title',
+          property: 'twitter:title',
+          content: 'お問合せ',
+        },
+      ],
     };
-  }
+  },
 });
 </script>

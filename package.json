@@ -25,7 +25,6 @@
     "dotenv": "^8.2.0",
     "express-asyncify": "^1.0.1",
     "nuxt": "^2.14.3",
-    "nuxt-robots-module": "^1.5.1",
     "vuetify": "^2.3.8"
   },
   "devDependencies": {

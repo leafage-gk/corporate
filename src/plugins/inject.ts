@@ -10,6 +10,8 @@ const plugin: Plugin = (ctx, inject) => {
   const company = companyRepositoryFactory(ctx.$axios);
   ctx.$company = company;
   inject('company', company);
+  // microcms apiもcloundfrontなので、viaヘッダーで多段になると403になる対策
+  ctx.$axios.defaults.headers.common = {};
 };
 
 export default plugin;

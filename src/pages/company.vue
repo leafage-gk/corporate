@@ -54,6 +54,13 @@ export default Vue.extend({
   },
   head: {
     title: '会社概要',
+    link: [
+      {
+        rel: 'canonical',
+        href: 'https://leafage.co.jp/company',
+        id: 'canonical',
+      },
+    ],
   },
 });
 </script>

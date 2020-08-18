@@ -17,7 +17,7 @@ module.exports = {
   loading: { color: 'white' },
   css: ['./assets/style/app.scss'],
   plugins: ['./plugins/inject'],
-  modules: ['@nuxtjs/axios', '@nuxtjs/sitemap', 'nuxt-robots-module'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/sitemap'],
   buildModules: [
     '@nuxtjs/google-analytics',
     '@nuxtjs/moment',

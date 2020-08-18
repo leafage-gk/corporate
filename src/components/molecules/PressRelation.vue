@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="`/press/${press.slug}`" height="100%">
+  <v-card height="100%">
     <v-img
       class="white--text align-end"
       height="200px"
@@ -11,14 +11,18 @@
       "
     >
       <v-card-title v-if="title" class="font-weight-bold">
-        {{ title }}
+        <nuxt-link :to="`/press/${press.slug}`" class="white--text">
+          {{ title }}
+        </nuxt-link>
       </v-card-title>
     </v-img>
     <v-card-subtitle class="pb-0">
       {{ $moment(press.publishedAt).format('YYYY年MM月DD日') }}
     </v-card-subtitle>
     <v-card-text>
-      {{ press.title }}
+      <nuxt-link :to="`/press/${press.slug}`" class="black--text">
+        {{ press.title }}
+      </nuxt-link>
     </v-card-text>
   </v-card>
 </template>

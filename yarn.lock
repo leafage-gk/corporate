@@ -9437,11 +9437,6 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuxt-robots-module@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/nuxt-robots-module/-/nuxt-robots-module-1.5.1.tgz#110bc068bc971ca44a2d85d94095ac9152d52364"
-  integrity sha512-A12tQkAfhGOCMhadqJqZcMFmFB4QWHKdNO75vZU9Lteh5bp8CyPCuzYgXVHG4LC5aHs5defBjsX9ja4FQCYA+w==
-
 nuxt-webfontloader@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/nuxt-webfontloader/-/nuxt-webfontloader-1.1.0.tgz#68b47ffbeaee4c41969f42f57a86946e0c36715c"

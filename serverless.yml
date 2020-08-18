@@ -47,6 +47,7 @@ functions:
       include:
         - .nuxt/dist/serverless.js
         - .nuxt/dist/server/**
+        - .nuxt/dist/sitemap-routes.json
       exclude:
         - .nuxt/**
         - src/**
@@ -65,6 +66,15 @@ functions:
         - webpack.config.js
         - yarn-error.log
     events:
+      - http:
+          path: /robots.txt
+          method: any
+          integration: http-proxy
+          request:
+            uri: https://${self:custom.buckets.STATIC_BUCKET_NAME}.s3.${self:provider.region}.amazonaws.com/robots.txt
+            parameters:
+              paths:
+                proxy: true
       - http:
           path: /
           method: any
@@ -98,8 +108,7 @@ resources:
         BucketName: ${self:custom.buckets.ASSETS_BUCKET_NAME}
         CorsConfiguration:
           CorsRules:
-            -
-              AllowedOrigins:
+            - AllowedOrigins:
                 - '*'
               AllowedHeaders:
                 - '*'
@@ -121,24 +130,29 @@ resources:
           Ref: ClientAssetsBucket
         PolicyDocument:
           Version: '2012-10-17'
-          Statement: [
-            {
-              Action: ['s3:GetObject'],
-              Effect: 'Allow',
-              Resource: {
-                Fn::Join: ['', ['arn:aws:s3:::', { Ref: 'ClientAssetsBucket' }, '/*']],
+          Statement:
+            [
+              {
+                Action: ['s3:GetObject'],
+                Effect: 'Allow',
+                Resource:
+                  {
+                    Fn::Join:
+                      [
+                        '',
+                        ['arn:aws:s3:::', { Ref: 'ClientAssetsBucket' }, '/*'],
+                      ],
+                  },
+                Principal: '*',
               },
-              Principal: '*'
-            },
-          ]
+            ]
     ClientStaticBucket:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.buckets.STATIC_BUCKET_NAME}
         CorsConfiguration:
           CorsRules:
-            -
-              AllowedOrigins:
+            - AllowedOrigins:
                 - '*'
               AllowedHeaders:
                 - '*'
@@ -160,13 +174,19 @@ resources:
           Ref: ClientStaticBucket
         PolicyDocument:
           Version: '2012-10-17'
-          Statement: [
-            {
-              Action: ['s3:GetObject'],
-              Effect: 'Allow',
-              Resource: {
-                Fn::Join: ['', ['arn:aws:s3:::', { Ref: 'ClientStaticBucket' }, '/*']],
+          Statement:
+            [
+              {
+                Action: ['s3:GetObject'],
+                Effect: 'Allow',
+                Resource:
+                  {
+                    Fn::Join:
+                      [
+                        '',
+                        ['arn:aws:s3:::', { Ref: 'ClientStaticBucket' }, '/*'],
+                      ],
+                  },
+                Principal: '*',
               },
-              Principal: '*'
-            },
-          ]
+            ]

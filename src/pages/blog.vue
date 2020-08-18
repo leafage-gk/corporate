@@ -68,6 +68,30 @@ export default Vue.extend({
   },
   head: {
     title: 'ブログ',
+    link: [
+      {
+        rel: 'canonical',
+        href: 'https://leafage.co.jp/blog',
+        id: 'canonical',
+      },
+    ],
+    meta: [
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: 'https://leafage.co.jp/blog',
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'ブログ',
+      },
+      {
+        hid: 'twitter:title',
+        property: 'twitter:title',
+        content: 'ブログ',
+      },
+    ],
   },
 });
 </script>

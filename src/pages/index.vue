@@ -250,7 +250,27 @@ export default Vue.extend({
     TopHero: () => import('~/components/molecules/TopArticle/TopHero.vue'),
   },
   head: {
-    title: '特急Web開発',
+    title: 'IT x Creativity',
+    link: [
+      {
+        rel: 'canonical',
+        href: 'https://leafage.co.jp',
+        id: 'canonical',
+      },
+    ],
+    meta: [
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'IT x Creativity',
+      },
+      {
+        hid: 'twitter:title',
+        property: 'twitter:title',
+        content: 'IT x Creativity',
+      },
+    ],
   },
   data() {
     return {

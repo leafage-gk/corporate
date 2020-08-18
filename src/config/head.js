@@ -34,8 +34,7 @@ module.exports = {
     {
       hid: 'og:site_name',
       property: 'og:site_name',
-      content: '',
-      template: config.titleTemplate,
+      content: config.company,
     },
     { hid: 'twitter:card', name: 'twitter:card', content: pkg.description },
     {
