@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     <v-img
       :src="imageSrc"
       :srcset="imageSrcset"
@@ -72,7 +72,7 @@
         </v-row>
       </v-col>
     </page-container>
-  </v-content>
+  </v-main>
 </template>
 
 <script lang="ts">

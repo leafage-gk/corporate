@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     <page-container :items="items">
       <v-col cols="12">
         <v-row justify="center" align="center">
@@ -17,7 +17,7 @@
         </v-row>
       </v-col>
     </page-container>
-  </v-content>
+  </v-main>
 </template>
 
 <script lang="ts">

@@ -1,51 +1,57 @@
 <template>
-  <v-content>
+  <v-main>
     <v-dialog v-model="dialog" width="800">
       <v-card>
         <form
           name="contact"
-          action="/contact_thanks/"
-          data-netlify="true"
-          data-netlify-recaptcha="true"
+          :action="actionUrl"
           method="POST"
         >
           <v-card-title class="headline grey lighten-2" primary-title>
             お問合せ内容確認
           </v-card-title>
           <v-container fluid>
-            <v-row v-for="(item, index) in contactList" :key="index">
-              <v-col cols="5" md="4">
-                <p class="font-weight-bold text-right">{{ item.label }}</p>
-              </v-col>
-              <v-col cols="7" md="8">{{ item.value }}</v-col>
-            </v-row>
+            <template v-for="(item, index) in contactList">
+              <v-row v-if="item.show" :key="index">
+                <v-col cols="5" md="4">
+                  <p class="font-weight-bold text-right">{{ item.label }}</p>
+                </v-col>
+                <v-col cols="7" md="8" style="word-wrap: break-word; white-space: pre-line;">
+                  {{ item.value }}
+                </v-col>
+              </v-row>
+            </template>
           </v-container>
           <v-divider />
           <v-card-text>
-            <v-layout justify-center align-center>
-              <vue-recaptcha
-                :sitekey="recaptchaKey"
-                @verify="verify"
-              ></vue-recaptcha>
-            </v-layout>
+            <div class="g-recaptcha" :data-sitekey="recaptchaKey"></div>
           </v-card-text>
           <v-divider />
           <v-card-actions>
-            <v-spacer></v-spacer>
-            <input type="hidden" name="form-name" value="contact" />
+            <v-spacer />
+            <template v-for="item in contactList">
+              <input
+                v-bind:key="item.name"
+                v-if="item.hidden"
+                type="hidden"
+                :name="item.name"
+                :value="item.value"
+              />
+            </template>
+            <input type="hidden" name="debug" value="1" />
             <input
-              v-bind:key="item.name"
-              v-for="item in contactList"
               type="hidden"
-              :name="item.name"
-              :value="item.value"
+              name="captcha_settings"
+              value='{"keyname":"leafage","fallback":"true","orgId":"00D2x00000750Zd","ts":""}'
             />
+            <input v-if="actionType === 'case'" type=hidden name="orgid" value="00D2x00000750Zd" />
+            <input v-else type="hidden" name="oid" value="00D2x00000750Zd" />
             <input
               type="hidden"
-              name="g-recaptcha-response"
-              :value="recaptcha"
+              name="retURL"
+              value="https://leafage.co.jp/contact_thanks"
             />
-            <v-btn :disabled="!verified" color="primary" text type="submit">
+            <v-btn color="primary" text type="submit">
               送信
             </v-btn>
             <v-btn color="secondary" text @click="dialog = false">
@@ -75,11 +81,11 @@
             </v-col>
             <v-col cols="12" sm="6">
               <v-text-field
-                name="name"
-                v-model="name"
-                :rules="nameRules"
+                name="last_name"
+                v-model="lastName"
+                :rules="lastNameRules"
                 label="姓"
-                counter="20"
+                counter="40"
                 color="primary"
                 hide-details
                 required
@@ -88,11 +94,11 @@
             </v-col>
             <v-col cols="12" sm="6">
               <v-text-field
-                name="kana"
-                v-model="kana"
-                :rules="kanaRules"
+                name="first_name"
+                v-model="firstName"
+                :rules="firstNameRules"
                 label="名"
-                counter="20"
+                counter="80"
                 hide-details
                 required
                 dense
@@ -104,7 +110,7 @@
                 v-model="email"
                 :rules="emailRules"
                 label="メールアドレス"
-                counter="100"
+                counter="80"
                 hide-details
                 required
                 dense
@@ -117,7 +123,7 @@
                 v-model="phone"
                 :rules="phoneRules"
                 label="電話番号"
-                counter="20"
+                counter="40"
                 hide-details
                 dense
                 prepend-icon="phone"
@@ -125,10 +131,10 @@
             </v-col>
             <v-col cols="12">
               <v-text-field
-                name="organization"
-                v-model="organization"
+                name="company"
+                v-model="company"
                 label="所属名・会社名"
-                counter="20"
+                counter="40"
                 hide-details
                 dense
                 prepend-icon="business"
@@ -136,8 +142,8 @@
             </v-col>
             <v-col cols="12">
               <v-textarea
-                name="content"
-                v-model="content"
+                name="description"
+                v-model="description"
                 label="お問合せ内容"
                 counter="5000"
                 hide-details
@@ -159,7 +165,7 @@
         </v-form>
       </v-col>
     </page-container>
-  </v-content>
+  </v-main>
 </template>
 
 <script lang="ts">
@@ -167,25 +173,32 @@ import Vue from 'vue';
 
 import { VuetifyForm } from '~/types/vuetify';
 
+interface ContactInfo {
+  label: string;
+  name: string;
+  value: string;
+  show: boolean;
+  hidden: boolean;
+}
+
 export default Vue.extend({
   components: {
     PageContainer: () => import('~/components/molecules/PageContainer.vue'),
-    VueRecaptcha: () => import('vue-recaptcha'),
   },
   data() {
     return {
       valid: true,
-      name: '',
-      nameRules: [(v: string) => !!v || '必須項目です。'],
-      kana: '',
-      kanaRules: [(v: string) => !!v || '必須項目です。'],
+      firstName: '',
+      firstNameRules: [(v: string) => !!v || '必須項目です。'],
+      lastName: '',
+      lastNameRules: [(v: string) => !!v || '必須項目です。'],
       email: '',
       emailRules: [
         (v: string) => !!v || '必須項目です。',
         (v: string) =>
           /.+@.+/.test(v) || '正しいメールアドレスを入力してください。',
       ],
-      organization: '',
+      company: '',
       phone: '',
       phoneRules: [
         (v: string) =>
@@ -193,7 +206,7 @@ export default Vue.extend({
       ],
       select: '',
       types: ['案件のご相談・ご依頼', 'パートナー募集', 'その他お問合せ'],
-      content: '',
+      description: '',
       dialog: false,
       items: [
         {
@@ -206,49 +219,165 @@ export default Vue.extend({
         },
       ],
       recaptchaKey: process.env.SITE_RECAPTCHA_KEY,
-      recaptcha: '',
-      verified: false,
+      timestamp: null as NodeJS.Timeout | null,
+      scripts: [] as { innerHTML: string; type: string; src: string; }[],
     };
   },
   computed: {
-    contactList(): { label: string; name: string; value: string }[] {
+    actionType(): 'case' | 'lead' {
+      if (this.select === 'その他お問合せ') {
+        return 'case';
+      }
+      return 'lead';
+    },
+    actionUrl(): string {
+      if (this.actionType === 'case') {
+        return 'https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8';
+      }
+      return 'https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
+    },
+    campaignId(): string {
+      if (this.select === '案件のご相談・ご依頼') {
+        return '7012x000000p2S5';
+      }
+      if (this.select === 'パートナー募集') {
+        return '7012x000000p2S0';
+      }
+      return '';
+    },
+    contactList(): ContactInfo[] {
+      const isCase = this.actionType === 'case';
       return [
-        { label: 'お問合せ種類', name: 'type', value: this.select },
-        { label: 'お名前', name: 'name', value: this.name },
-        { label: 'ふりがな', name: 'kana', value: this.kana },
-        { label: 'メールアドレス', name: 'email', value: this.email },
+        {
+          label: 'お問合せ種類',
+          name: 'select',
+          value: this.select,
+          show: true,
+          hidden: false,
+        },
+        {
+          label: '姓',
+          name: 'last_name',
+          value: this.lastName,
+          show: true,
+          hidden: !isCase,
+        },
+        {
+          label: '名',
+          name: 'first_name',
+          value: this.firstName,
+          show: true,
+          hidden: !isCase,
+        },
+        {
+          label: '取引先責任者名',
+          name: isCase ? 'WebName__c' : 'name',
+          value: this.lastName + ' ' + this.firstName,
+          show: false,
+          hidden: isCase,
+        },
+        {
+          label: 'メールアドレス',
+          name: 'email',
+          value: this.email,
+          show: true,
+          hidden: true,
+        },
         {
           label: '所属名・会社名',
-          name: 'organization',
-          value: this.organization,
+          name: isCase ? 'WebCompany__c' : 'company',
+          value: this.company,
+          show: true,
+          hidden: true,
         },
-        { label: '電話番号', name: 'phone', value: this.phone },
-        { label: 'お問合せ内容', name: 'content', value: this.content },
+        {
+          label: '電話番号',
+          name: isCase ? 'WebPhone__c' : 'phone',
+          value: this.phone,
+          show: true,
+          hidden: true,
+        },
+        {
+          label: '件名',
+          name: 'subject',
+          value: 'その他お問合せ',
+          show: false,
+          hidden: isCase,
+        },
+        {
+          label: 'リードソース',
+          name: 'lead_source',
+          value: 'Web',
+          show: false,
+          hidden: !isCase,
+        },
+        {
+          label: 'お問合せ内容',
+          name: 'description',
+          value: this.description,
+          show: true,
+          hidden: true,
+        },
+        {
+          label: 'キャンペーン',
+          name: 'Campaign_ID',
+          value: this.campaignId,
+          show: false,
+          hidden: !isCase,
+        },
+        {
+          label: '種別',
+          name: 'type',
+          value: 'Question',
+          show: false,
+          hidden: isCase,
+        },
       ];
     },
+  },
+  beforeDestroy() {
+    if (this.timestamp) {
+      clearInterval(this.timestamp);
+    }
   },
   methods: {
     validate() {
       if ((this.$refs.form as VuetifyForm).validate()) {
         this.dialog = true;
+        this.recaptchaSetup();
+        this.scripts = [
+          {
+            innerHTML: '',
+            type: 'text/javascript',
+            src: 'https://www.google.com/recaptcha/api.js',
+          },
+        ];
       }
     },
-    verify(response: string) {
-      this.recaptcha = response;
-      this.verified = true;
-    },
+    recaptchaSetup() {
+      const timestamp = () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const response: any = document.getElementById('g-recaptcha-response');
+        if (response === null || response.value.trim() == '') {
+          const elems = JSON.parse(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (document.getElementsByName('captcha_settings') as any)[0].value,
+          );
+          elems['ts'] = JSON.stringify(new Date().getTime());
+          (document.getElementsByName(
+            'captcha_settings',
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          ) as any)[0].value = JSON.stringify(elems);
+        }
+      };
+      this.timestamp = setInterval(timestamp, 500);
+    }
   },
-  head: {
-    script: [
-      {
-        innerHTML: '',
-        type: 'text/javascript',
-        src:
-          '//www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit',
-        async: true,
-      },
-    ],
-    title: 'お問合せ',
-  },
+  head() {
+    return {
+      script: (this as any).scripts,
+      title: 'お問合せ',
+    };
+  }
 });
 </script>

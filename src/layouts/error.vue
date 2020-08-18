@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     <v-container>
       <h1>{{ error.statusCode }} {{ error.message }}</h1>
       <h2 v-if="error.statusCode == 404">
@@ -13,7 +13,7 @@
         見つけることができません。
       </p>
     </v-container>
-  </v-content>
+  </v-main>
 </template>
 
 <script lang="ts">

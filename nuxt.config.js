@@ -10,6 +10,7 @@ const vuetify = require('./src/config/modules/vuetify');
 
 module.exports = {
   mode: 'universal',
+  telemetry: false,
   head,
   env,
   srcDir: './src',

@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     <top-hero />
     <v-container fluid>
       <v-row>
@@ -9,7 +9,7 @@
               <v-parallax
                 :class="{ 'on-hover': hover }"
                 :height="mdAndUp ? 300 : 200"
-                :src="require('~/assets/images/top/mission.webp').default"
+                :src="require('~/assets/images/top/mission.webp')"
               >
                 <v-overlay absolute z-index="-1" :opacity="hover ? 0.2 : 0.4" />
                 <v-card-title
@@ -233,7 +233,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-content>
+  </v-main>
 </template>
 
 <script lang="ts">
