@@ -62,6 +62,9 @@ functions:
         - .eslintrc
         - .prettierrc
         - .stylelintrc
+        - .env
+        - .env.sample
+        - static/**
         - gulpfile.js
         - webpack.config.js
         - yarn-error.log
@@ -118,7 +121,7 @@ resources:
                 - PUT
                 - POST
                 - DELETE
-              MaxAge: 3000
+              MaxAge: 86400
               ExposedHeaders:
                 - x-amz-server-side-encryption
                 - x-amz-request-id
@@ -162,7 +165,7 @@ resources:
                 - PUT
                 - POST
                 - DELETE
-              MaxAge: 3000
+              MaxAge: 86400
               ExposedHeaders:
                 - x-amz-server-side-encryption
                 - x-amz-request-id
