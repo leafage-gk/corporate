@@ -38,7 +38,7 @@
                 :value="item.value"
               />
             </template>
-            <input type="hidden" name="debug" value="1" />
+            <!-- <input type="hidden" name="debug" value="1" /> -->
             <input
               type="hidden"
               name="captcha_settings"
