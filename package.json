@@ -18,17 +18,18 @@
     "generate:webp": "gulp webp"
   },
   "dependencies": {
-    "nuxt": "^2.14.3"
-  },
-  "devDependencies": {
-    "@nuxt/types": "^2.14.3",
     "@nuxt/typescript-build": "^2.0.2",
-    "@nuxt/typescript-runtime": "^1.0.0",
     "@nuxtjs/axios": "^5.12.1",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/moment": "^1.6.0",
     "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/vuetify": "^1.11.2",
+    "nuxt": "^2.14.3",
+    "nuxt-webfontloader": "^1.1.0"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.14.3",
+    "@nuxt/typescript-runtime": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
     "aws-serverless-express": "^3.3.8",
@@ -47,7 +48,6 @@
     "gulp": "^4.0.2",
     "gulp-webp": "^4.0.1",
     "node-sass": "^4.14.1",
-    "nuxt-webfontloader": "^1.1.0",
     "prettier": "^2.0.5",
     "sass": "^1.26.10",
     "sass-loader": "8.0.2",
