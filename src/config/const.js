@@ -7,13 +7,13 @@ module.exports = {
   drawerItems: [
     { title: 'TOP', to: '/', icon: 'home' },
     { title: '会社概要', to: '/company', icon: 'business' },
-    { title: 'ニュース', to: '/news', icon: 'notes' },
+    { title: '最新情報', to: '/news', icon: 'notes' },
     // { title: 'ソリューション', to: '/business' },
     { title: 'お問い合わせ', to: '/contact', icon: 'email' },
   ],
   headerBtnItems: [
     { title: '会社概要', to: '/company' },
-    { title: 'ニュース', to: '/news' },
+    { title: '最新情報', to: '/news' },
     // { title: 'ソリューション', to: '/business' },
     { title: 'お問い合わせ', to: '/contact', accent: true },
   ],

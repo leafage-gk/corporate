@@ -72,7 +72,7 @@ gulp.task('webp', () => {
       }),
     )
     .pipe(webp())
-    .pipe(gulp.dest('./assets/images/'))
+    .pipe(gulp.dest('./src/assets/images/'))
     .pipe(
       through.obj(
         function (file, enc, cb) {
@@ -116,5 +116,5 @@ gulp.task('webp', () => {
         },
       ),
     )
-    .pipe(gulp.dest('./hooks/images/'));
+    .pipe(gulp.dest('./src/hooks/images/'));
 });

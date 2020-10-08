@@ -1,77 +1,7 @@
 <template>
-  <v-main>
-    <v-img
-      :src="imageSrc"
-      :srcset="imageSrcset"
-      height="300"
-      gradient="to top, rgba(0, 0, 0, 0.6) 0%, transparent 70%"
-    >
-      <v-row align="end" class="fill-height px-4">
-        <v-col>
-          <h1 class="white--text subheading">
-            {{ press.title }}
-          </h1>
-        </v-col>
-      </v-row>
-    </v-img>
-    <page-container :items="items">
-      <v-col cols="12">
-        <v-row>
-          <v-col cols="12">
-            <v-chip class="mx-2" color="primary" label>
-              {{ press.type.title }}
-            </v-chip>
-            <span class="grey--text">
-              {{ $moment(press.publishedAt).format('YYYY年MM月DD日') }}
-            </span>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col class="body-theme">
-            <template v-for="(item, index) in press.body">
-              <div
-                v-if="item.fieldId === 'richEditor'"
-                v-html="item.richEditor"
-                :key="index"
-              />
-              <div v-else v-html="item.html" :key="index" />
-            </template>
-          </v-col>
-        </v-row>
-        <v-row v-if="press.relatedArticles.length > 0">
-          <v-col cols="12">
-            <v-divider />
-          </v-col>
-          <v-col cols="12">
-            <h2 class="subheading">
-              関連記事
-            </h2>
-          </v-col>
-          <v-col
-            v-for="(related, index) in press.relatedArticles"
-            :key="index"
-            cols="12"
-            sm="6"
-            md="5"
-            lg="4"
-            xl="3"
-          >
-            <press-relation :press="related" />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12">
-            <v-divider />
-          </v-col>
-          <v-col v-if="press.prev" cols="12" sm="6" md="5" lg="4" xl="3">
-            <press-relation :press="press.prev" title="前の記事" />
-          </v-col>
-          <v-col v-if="press.next" cols="12" sm="6" md="5" lg="4" xl="3">
-            <press-relation :press="press.next" title="次の記事" />
-          </v-col>
-        </v-row>
-      </v-col>
-    </page-container>
+  <v-main class="grey lighten-4">
+    <responsive-image align="end" :height="300" :srcs="pageHeader" />
+    <press-container :items="items" :press="press" />
   </v-main>
 </template>
 
@@ -80,12 +10,15 @@ import { Context } from '@nuxt/types';
 import Vue from 'vue';
 
 import PressHeader from '~/assets/images/page_header@1280w.webp';
+import ResponsiveImage from '~/components/atoms/ResponsiveImage.vue';
+import PressContainer from '~/components/organisms/PressContainer.vue';
 import { PressPost } from '~/domains/press';
+import pageHeader from '~/hooks/images/press_header';
 
 export default Vue.extend({
   components: {
-    PageContainer: () => import('~/components/molecules/PageContainer.vue'),
-    PressRelation: () => import('~/components/molecules/PressRelation.vue'),
+    ResponsiveImage,
+    PressContainer,
   },
   data() {
     return {
@@ -96,23 +29,16 @@ export default Vue.extend({
         to: string;
         disabled: boolean;
       }[],
+      pageHeader,
+      isMounted: false,
     };
   },
+  mounted() {
+    this.isMounted = true;
+  },
   computed: {
-    imageSrc(): string {
-      return this.press && this.press.thumbnail
-        ? this.press.thumbnail.url + '?h=300&w=1200&fit=crop&dpr=1'
-        : PressHeader;
-    },
-    imageSrcset(): string {
-      if (this.press && this.press.thumbnail) {
-        return [
-          this.press.thumbnail.url + '?h=300&w=1200&fit=crop&dpr=1 1x',
-          this.press.thumbnail.url + '?h=300&w=1200&fit=crop&dpr=2 2x',
-        ].join(',');
-      } else {
-        return PressHeader;
-      }
+    mdAndUp(): boolean {
+      return this.isMounted ? this.$vuetify.breakpoint.mdAndUp : true;
     },
   },
   async asyncData(context: Context) {
@@ -129,13 +55,21 @@ export default Vue.extend({
             to: '/',
           },
           {
-            text: 'ニュース一覧',
+            text: '最新情報一覧',
             to: '/news',
+            // text:
+            //   press.type.id === '2u9ctzqlxi' ? 'ニュース一覧' : 'ブログ一覧',
+            // to: press.type.id === '2u9ctzqlxi' ? '/news' : '/blog',
             exact: true,
           },
           {
             text: press.title,
-            to: `/press/${press.slug}`,
+            to: {
+              path: `/preview/press/${press.id}`,
+              query: {
+                draftKey: context.query['draftKey'],
+              },
+            },
           },
         ],
       };

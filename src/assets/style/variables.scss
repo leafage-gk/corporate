@@ -2,5 +2,15 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
-$body-font-family: 'Helvetica Neue', arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', meiryo, sans-serif;
+$body-font-family: 'Helvetica Neue', arial, 'Hiragino Kaku Gothic ProN',
+  'Hiragino Sans', meiryo, sans-serif;
+
+$grid-breakpoints: (
+  'lg': 1280px - 16px,
+);
+
+$container-max-widths: (
+  'xl': map-get($grid-breakpoints, 'lg') * 0.9375,
+);
+
 @import '~vuetify/src/styles/styles.sass';

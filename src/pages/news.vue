@@ -3,7 +3,7 @@
     <page-container :items="items">
       <v-col cols="12" v-if="posts">
         <v-row justify="start" align="center" class="ma-4">
-          <v-subheader><h2>ニュース</h2></v-subheader>
+          <v-subheader><h2>最新情報</h2></v-subheader>
         </v-row>
         <v-row
           class="my-3"
@@ -47,7 +47,8 @@ export default Vue.extend({
     };
   },
   async asyncData(context: Context) {
-    const posts = await context.$press.fetchRecently('2u9ctzqlxi', 0, 10);
+    // const posts = await context.$press.fetchRecently('2u9ctzqlxi', 0, 10);
+    const posts = await context.$press.fetchRecentlyAll();
     return {
       posts,
       items: [
@@ -58,7 +59,7 @@ export default Vue.extend({
           disabled: false,
         },
         {
-          text: 'ニュース',
+          text: '最新情報一覧',
           to: '/news',
           exact: true,
           disabled: true,
@@ -67,7 +68,7 @@ export default Vue.extend({
     };
   },
   head: {
-    title: 'ニュース',
+    title: '最新情報一覧',
     link: [
       {
         rel: 'canonical',
@@ -84,12 +85,12 @@ export default Vue.extend({
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'ニュース',
+        content: '最新情報一覧',
       },
       {
         hid: 'twitter:title',
         property: 'twitter:title',
-        content: 'ニュース',
+        content: '最新情報一覧',
       },
     ],
   },

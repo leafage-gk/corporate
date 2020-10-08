@@ -14,4 +14,20 @@
   img {
     max-width: 100%;
   }
+  h2 {
+    padding: 8px 20px;
+    margin: 16px 0;
+    border-left: 8px solid map-get($blue-grey, base);
+  }
+  h3 {
+    padding: 4px 12px;
+    margin: 16px 0;
+    border-bottom: 2px solid;
+    border-image: linear-gradient(
+      to right,
+      map-get($teal, base) 0%,
+      map-get($teal, darken-4) 100%
+    );
+    border-image-slice: 1;
+  }
 }

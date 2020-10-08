@@ -121,6 +121,20 @@ export const pressRepositoryFactory = ($axios: Context['$axios']) => {
         },
       );
     },
+    fetchRecentlyAll(): Promise<PressPostSummaryResponse> {
+      return $axios.$get<PressPostSummaryResponse>(
+        'https://leafage.microcms.io/api/v1/news',
+        {
+          params: {
+            fields: summaryFields,
+            order: '-publishedAt,-updatedAt',
+          },
+          headers: {
+            'X-API-KEY': env.MICROCMS_X_API_KEY,
+          },
+        },
+      );
+    },
     async getBySlug(slug: string): Promise<PressPost> {
       const items = await $axios.$get<PressPostResponse>(
         'https://leafage.microcms.io/api/v1/news',

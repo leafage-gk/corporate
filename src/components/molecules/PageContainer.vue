@@ -1,16 +1,12 @@
 <template>
-  <v-container fluid>
-    <v-row no-gutters justify="center" align="center">
-      <v-col cols="12" sm="10" md="8">
-        <v-row justify="start" align="center">
-          <v-col cols="12">
-            <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
-          </v-col>
-        </v-row>
-        <v-row :justify="justify" align="center">
-          <slot />
-        </v-row>
+  <v-container>
+    <v-row justify="start" align="center">
+      <v-col cols="12">
+        <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
       </v-col>
+    </v-row>
+    <v-row :justify="justify" :align="align" :class="{ 'px-5': padding }">
+      <slot />
     </v-row>
   </v-container>
 </template>
@@ -27,6 +23,14 @@ export default Vue.extend({
     justify: {
       type: String,
       default: 'start',
+    },
+    align: {
+      type: String,
+      default: 'center',
+    },
+    padding: {
+      type: Boolean,
+      default: false,
     },
   },
 });
