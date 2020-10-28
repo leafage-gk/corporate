@@ -4,7 +4,7 @@
     gradient="to bottom, rgba(100,115,201,.33), rgba(25,32,72,.7)"
     :with-aspect-ratio="smAndUp"
     :aspect-ratio="16 / 7"
-    :height="300"
+    :height="400"
     :srcs="srcs"
   >
     <slot />

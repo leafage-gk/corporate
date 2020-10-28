@@ -1,5 +1,5 @@
 <template>
-  <v-footer padless>
+  <v-footer padless id="footer">
     <v-card flat tile width="100%" class="white--text text-center">
       <responsive-image
         :height="300"
@@ -9,7 +9,7 @@
       >
         <v-card-text>
           <p :class="footerText">
-            アプリ開発、サイト・LP制作、リスティング運用など
+            LP・Webサイト制作、リスティング代行、システム開発など
           </p>
           <p :class="footerText">
             Webに関することなら当社へお気軽にご相談ください
@@ -17,7 +17,7 @@
         </v-card-text>
         <v-btn
           :x-large="mdAndUp"
-          class="ma-6"
+          class="ma-6 text-h6"
           color="accent darken-1"
           to="/contact"
         >
@@ -27,8 +27,14 @@
       </responsive-image>
       <v-card-text class="secondary darken-4 white--text">
         <p class="ma-0">
-          &copy; {{ new Date().getFullYear() }} {{ company }}
-          All Rights Reserved.
+          <span>
+            &copy; {{ new Date().getFullYear() }} {{ company }}
+            All Rights Reserved.
+          </span>
+          <span class="mx-2">|</span>
+          <nuxt-link to="/privacy" class="white--text">
+            プライバシーポリシー
+          </nuxt-link>
         </p>
       </v-card-text>
     </v-card>
@@ -64,8 +70,8 @@ export default Vue.extend({
     },
     footerText(): Record<string, boolean> {
       return {
-        'subtitle-1': this.mdAndUp,
-        'body-2': !this.mdAndUp,
+        'text-subtitle-1': this.mdAndUp,
+        'text-subtitle-2': !this.mdAndUp,
         'ma-0': true,
         'white--text': true,
       };

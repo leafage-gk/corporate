@@ -1,33 +1,15 @@
 <template>
-  <v-carousel
-    height="auto"
-    continuous
-    cycle
-    :hide-delimiters="!mdAndUp"
-    show-arrows-on-hover
-  >
+  <v-carousel height="auto" continuous cycle show-arrows-on-hover>
     <v-carousel-item>
       <hero-image :srcs="heroImages.hero">
         <v-container height="100%" class="white--text">
           <v-row>
             <v-col align="center" justify="center">
-              <h1
-                :class="{
-                  'mb-2': true,
-                  'display-4': mdAndUp,
-                  'display-1': !mdAndUp,
-                  'font-weight-medium': true,
-                }"
-              >
+              <h1 class="text-h4 text-md-h1 mb-2">
                 IT ✖ Creativity
               </h1>
-              <p
-                :class="{
-                  headline: mdAndUp,
-                  'subtitle-1': !mdAndUp,
-                }"
-              >
-                素敵な体験を次世代に。
+              <p class="text-subtitle-1 text-md-h5">
+                素敵な体験を次世代に
               </p>
             </v-col>
           </v-row>
@@ -37,47 +19,47 @@
     <v-carousel-item>
       <hero-carousel-item
         color="red--text text--lighten-2"
-        title="受託開発"
+        title="LP・Webサイト制作"
         icon="color_lens"
         _to="/business/development"
         :srcs="heroImages.development"
       >
-        <p :class="carouselText">
-          Webサイト制作＆アプリ開発ならお任せください
+        <p class="text-subtitle-2 text-md-h6 ma-0">
+          人目を引く・使いやすい・洗練されたデザインのWebサイト制作はお任せください
         </p>
-        <p :class="carouselText">
-          Vue.js、Nuxt.js、ReactNative、Flatter、Unity
+        <p class="text-subtitle-2 text-md-h6 ma-0">
+          Vue.js、Nuxt.js、HeadlessCMS、JAMstack、SSR、AMP、Serverless
         </p>
       </hero-carousel-item>
     </v-carousel-item>
     <v-carousel-item>
       <hero-carousel-item
         color="light-blue--text text--lighten-2"
-        title="開発メンター"
-        icon="group"
+        title="SEO・リスティング代行"
+        icon="campaign"
         _to="/business/mentor"
         :srcs="heroImages.mentor"
       >
-        <p :class="carouselText">
-          環境構築支援、技術選定支援、DevOps導入支援、技術メンター
+        <p class="text-subtitle-2 text-md-h6 ma-0">
+          コストパフォーマンスのよいキーワード選定と人目につく広告文でCPA改善します
         </p>
-        <p :class="carouselText">
-          自社開発でお困りのことがあれば、経験豊富な弊社スタッフにお任せください
+        <p class="text-subtitle-2 text-md-h6 ma-0">
+          A/Bテスト、ヒートマップ解析を継続的に行い、CVRを向上させます
         </p>
       </hero-carousel-item>
     </v-carousel-item>
     <v-carousel-item>
       <hero-carousel-item
         color="amber--text text--lighten-2"
-        title="バックエンドインフラ構築"
+        title="システム開発"
         icon="build"
         _to="/business/support-infra"
         :srcs="heroImages.infra"
       >
-        <p :class="carouselText">
+        <p class="text-subtitle-2 text-md-h6 ma-0">
           高可用性、耐障害性、高セキュリティ、優れたメンテナンス性
         </p>
-        <p :class="carouselText">
+        <p class="text-subtitle-2 text-md-h6 ma-0">
           AWS、Firebase上で、ハイパフォーマンスなシステムを構築します
         </p>
       </hero-carousel-item>
@@ -85,15 +67,15 @@
     <v-carousel-item>
       <hero-carousel-item
         color="teal--text text--lighten-2"
-        title="業務改善"
-        icon="loop"
+        title="業務改善・DX支援"
+        icon="cloud"
         _to="/business/bpm"
         :srcs="heroImages.bpm"
       >
-        <p :class="carouselText">
+        <p class="text-subtitle-2 text-md-h6 ma-0">
           BPMを提案から導入、運用までをフルサポート
         </p>
-        <p :class="carouselText">
+        <p class="text-subtitle-2 text-md-h6 ma-0">
           効果を測定し、改善していくことで、業務プロセスのパフォーマンスを向上させます
         </p>
       </hero-carousel-item>
@@ -120,7 +102,6 @@ export default Vue.extend({
   },
   data() {
     return {
-      isMounted: false,
       heroImages: {
         hero,
         bpm,
@@ -129,21 +110,6 @@ export default Vue.extend({
         mentor,
       },
     };
-  },
-  mounted() {
-    this.isMounted = true;
-  },
-  computed: {
-    mdAndUp(): boolean {
-      return this.isMounted ? this.$vuetify.breakpoint.mdAndUp : true;
-    },
-    carouselText(): Record<string, boolean> {
-      return {
-        title: this.mdAndUp,
-        'subtitle-2': !this.mdAndUp,
-        'ma-0': true,
-      };
-    },
   },
 });
 </script>

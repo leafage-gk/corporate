@@ -17,13 +17,7 @@
                 {{ icon }}
               </v-icon>
             </v-card-text>
-            <v-card-title
-              :class="{
-                'display-1': mdAndUp,
-                title: !mdAndUp,
-                'justify-center': true,
-              }"
-            >
+            <v-card-title class="text-h5 text-md-h4 justify-center">
               {{ title }}
             </v-card-title>
             <v-card-text class="white--text">
@@ -69,6 +63,7 @@ export default Vue.extend({
     },
     to: {
       type: String,
+      required: false,
     },
   },
   data() {

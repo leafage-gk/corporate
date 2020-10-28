@@ -1,50 +1,41 @@
 <template>
   <v-main>
     <top-hero />
-    <v-container fluid>
+    <v-container fluid class="py-0 overflow-hidden">
       <v-row>
-        <v-col>
-          <v-hover v-slot="{ hover }">
-            <v-card tile :elevation="hover ? 10 : 2" class="text-center">
-              <v-parallax
-                :class="{ 'on-hover': hover }"
-                :height="mdAndUp ? 300 : 200"
-                :src="require('~/assets/images/top/mission.webp')"
+        <v-col class="pa-0">
+          <v-card tile flat class="text-center">
+            <v-parallax
+              :height="mdAndUp ? 400 : 300"
+              :src="require('~/assets/images/top/mission.webp')"
+            >
+              <v-overlay absolute z-index="-1" :opacity="0.4" />
+              <v-card-title
+                class="justify-center accent--text text--lighten-2 front-weight-medium mission-anim"
               >
-                <v-overlay absolute z-index="-1" :opacity="hover ? 0.2 : 0.4" />
-                <v-card-title
-                  :class="{
-                    'justify-center': true,
-                    title: mdAndUp,
-                    'subtitle-1': !mdAndUp,
-                    'accent--text': true,
-                    'text--lighten-2': true,
-                    'font-weight-medium': true,
-                  }"
-                >
-                  リーフエイジの使命 - Our Mission -
-                </v-card-title>
-                <v-card-text
-                  :class="{
-                    headline: mdAndUp,
-                    title: !mdAndUp,
-                    'white--text': true,
-                  }"
-                >
-                  人々の記憶に残る、素敵な体験を世の中に届けたい。
-                </v-card-text>
-              </v-parallax>
-            </v-card>
-          </v-hover>
+                <h2 class="text-h4 text-md-h3">
+                  <span class="d-inline-block">リーフエイジの使命</span>
+                  <span class="d-inline-block">- Our Mission -</span>
+                </h2>
+              </v-card-title>
+              <v-card-text class="text-h6 text-md-h5 mission-anim">
+                人々の記憶に残る、素敵な体験を世の中に届けたい。
+              </v-card-text>
+            </v-parallax>
+          </v-card>
         </v-col>
       </v-row>
-      <v-row justify="center">
-        <v-col cols="12" sm="10" md="8" lg="6" xl="4">
+      <v-row
+        justify="center"
+        class="primary darken-3 pt-5"
+        id="mission-anim-trigger"
+      >
+        <v-col cols="12" sm="10" md="8">
           <v-card class="pa-5">
             <v-row no-gutters align="center">
               <v-col>
                 <v-card-title>
-                  <h2 class="headline">お知らせ</h2>
+                  <h2 class="text-h4">お知らせ</h2>
                 </v-card-title>
               </v-col>
               <v-col class="text-right">
@@ -61,7 +52,7 @@
                     {{ $moment(item.publishedAt).format('YYYY年MM月DD日') }}
                   </v-list-item-subtitle>
                   <v-list-item-title>
-                    <nuxt-link :to="`/press/${item.slug}`">
+                    <nuxt-link :to="`/press/${item.slug}`" class="text-h6">
                       {{ item.title }}
                     </nuxt-link>
                   </v-list-item-title>
@@ -71,172 +62,276 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-row justify="center">
-        <v-col cols="12" sm="10" lg="8" xl="6">
-          <v-row justify="center" class="mt-5">
-            <v-icon color="info" :size="50">emoji_objects</v-icon>
-          </v-row>
-          <v-row justify="center" class="mb-5">
-            <v-subheader
-              :class="{
-                headline: mdAndUp,
-                'subtitle-2': !mdAndUp,
-                'info--text': true,
-              }"
-            >
-              <h2>リーフエイジのソリューション</h2>
-            </v-subheader>
-          </v-row>
-          <v-row>
-            <v-col cols="12" md="4">
-              <v-img
-                :src="developmentImages.src600w"
-                :aspect-ratio="mdAndUp ? 1 : 2"
-              />
-            </v-col>
-            <v-col>
-              <v-card tile flat>
-                <v-card-title
-                  :class="{
-                    headline: mdAndUp,
-                    title: !mdAndUp,
-                    'font-weight-medium': true,
-                  }"
-                >
-                  Webサービス、モバイルアプリの受託開発
-                </v-card-title>
-                <v-card-text :class="mdAndUp ? 'title' : 'subtitle-1'">
-                  <ul>
-                    <li>
-                      <v-icon color="info">check_circle</v-icon>
-                      <span>他社と比べて低コストでの開発が可能</span>
-                    </li>
-                    <li>
-                      <v-icon color="info">check_circle</v-icon>
-                      <span>
-                        要件の見極めを両社間で深く洞察していき、ユーザーに使われる製品を生み出す
-                      </span>
-                    </li>
-                  </ul>
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col :order="mdAndUp ? 1 : 3">
-              <v-card tile flat>
-                <v-card-title
-                  :class="{
-                    headline: mdAndUp,
-                    title: !mdAndUp,
-                    'font-weight-medium': true,
-                  }"
-                >
-                  開発メンター
-                </v-card-title>
-                <v-card-text :class="mdAndUp ? 'title' : 'subtitle-1'">
-                  <ul>
-                    <li>
-                      <v-icon color="info">check_circle</v-icon>
-                      <span>
-                        環境構築支援、技術選定支援、DevOps導入支援、技術メンター等、開発の効率化アップに寄与
-                      </span>
-                    </li>
-                    <li>
-                      <v-icon color="info">check_circle</v-icon>
-                      <span>
-                        スクラム開発のノウハウを生かし、チームのパフォーマンスの最大化を図る
-                      </span>
-                    </li>
-                  </ul>
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col cols="12" md="4" order="2">
-              <v-img
-                :src="mentorImages.src600w"
-                :aspect-ratio="mdAndUp ? 1 : 2"
-              />
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" md="4">
-              <v-img
-                :src="infraImages.src600w"
-                :aspect-ratio="mdAndUp ? 1 : 2"
-              />
-            </v-col>
-            <v-col>
-              <v-card tile flat>
-                <v-card-title
-                  :class="{
-                    headline: mdAndUp,
-                    title: !mdAndUp,
-                    'font-weight-medium': true,
-                  }"
-                >
-                  バックエンドインフラの構築
-                </v-card-title>
-                <v-card-text :class="mdAndUp ? 'title' : 'subtitle-1'">
-                  <ul>
-                    <li>
-                      <v-icon color="info">check_circle</v-icon>
-                      <span>
-                        クラウドインフラを導入することによる低コストなバックエンドインフラの構築
-                      </span>
-                    </li>
-                    <li>
-                      <v-icon color="info">check_circle</v-icon>
-                      <span>
-                        高可用性、耐障害性、高セキュリティで優れたメンテナンス性を担保していく
-                      </span>
-                    </li>
-                  </ul>
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col :order="mdAndUp ? 1 : 3">
-              <v-card tile flat>
-                <v-card-title
-                  :class="{
-                    headline: mdAndUp,
-                    title: !mdAndUp,
-                    'font-weight-medium': true,
-                  }"
-                >
-                  BPMを提案から導入、運用までをフルサポート
-                </v-card-title>
-                <v-card-text :class="mdAndUp ? 'title' : 'subtitle-1'">
-                  <ul>
-                    <li>
-                      <v-icon color="info">check_circle</v-icon>
-                      <span>
-                        効果を測定し、改善していくことで、業務プロセスのパフォーマンスを向上
-                      </span>
-                    </li>
-                    <li>
-                      <v-icon color="info">check_circle</v-icon>
-                      <span>
-                        業界動向の変化に合わせてシステムの調整を行い、事業継続性の向上につなげる
-                      </span>
-                    </li>
-                  </ul>
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col cols="12" md="4" order="2">
-              <v-img :src="bpmImages.src600w" :aspect-ratio="mdAndUp ? 1 : 2" />
-            </v-col>
-          </v-row>
+      <v-row
+        justify="center"
+        class="pt-5 primary darken-3"
+        id="solution-anim-trigger"
+      >
+        <v-col class="solution-animation text-center">
+          <v-icon color="info lighten-1" :size="100" class="mt-10 d-block">
+            emoji_objects
+          </v-icon>
+          <h2
+            class="mb-10 mx-auto info--text text--lighten-1 text-h4 text-md-h3 font-weight-bold"
+          >
+            <span class="d-inline-block">リーフエイジ</span>
+            <span class="d-inline-block">のソリューション</span>
+          </h2>
         </v-col>
       </v-row>
+      <div class="primary darken-3 mx-n3" id="solution-anim1-trigger">
+        <v-row
+          no-gutters
+          justify="center"
+          class="secondary darken-4 solution-anim1"
+        >
+          <v-col cols="12" sm="10" lg="8" class="py-10 px-5">
+            <v-card flat class="fill-height overflow-hidden">
+              <v-row no-gutters>
+                <v-col cols="12" md="4" lg="3" class="pa-0">
+                  <v-img
+                    :src="developmentImages.src600w"
+                    :aspect-ratio="mdAndUp ? undefined : 2"
+                    :height="mdAndUp ? '100%' : undefined"
+                  />
+                </v-col>
+                <v-col class="pa-3">
+                  <v-card-title>
+                    <h3 class="text-h4 solution-head px-2">
+                      1. ランディングページ・Webサイト制作
+                    </h3>
+                  </v-card-title>
+                  <v-card-text class="mx-0 mx-md-3">
+                    <ul class="text-h6">
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          集客に貢献する人目を引くサイトデザイン、使いやすい軽快なユーザビリティ
+                        </span>
+                      </li>
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          HeadlessCMS、JAMstack、SSR、AMP等、最先端のWeb技術をお手頃に
+                        </span>
+                      </li>
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          低コスト・高パフォーマンスな運用体制、きめ細やかな顧客サポート体制など、
+                          <span class="d-inline-block">
+                            アフターフォローも充実
+                          </span>
+                        </span>
+                      </li>
+                    </ul>
+                    <p class="mt-5 text-body-1">
+                      人目を引く・使いやすい・洗練されたデザインを重視してサイト制作します。<br />
+                      LP制作はデザインからコーディング、運用まで多数の実績がございます。<br />
+                      商材の独自の強みや差別化ポイントを抽出し、ユニークセリングプロポジションを作り出します。<br /><br />
+                      自社ブランドを高めるコーポレートサイトやブランドサイトもお任せください。
+                    </p>
+                  </v-card-text>
+                  <v-card-actions class="mb-5">
+                    <v-spacer />
+                    <v-btn
+                      :class="{ 'text-caption': !mdAndUp }"
+                      color="info"
+                      href="https://studio-cleaf.com"
+                      target="_blank"
+                    >
+                      ホームページ・LP制作ならSTUDIO CLEAF
+                      <v-icon right>play_arrow</v-icon>
+                    </v-btn>
+                    <v-spacer />
+                  </v-card-actions>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
+      <div class="secondary darken-4 mx-n3" id="solution-anim2-trigger">
+        <v-row
+          justify="center"
+          no-gutters
+          class="primary darken-3 solution-anim2"
+        >
+          <v-col cols="12" sm="10" lg="8" class="py-10 px-5">
+            <v-card flat class="fill-height overflow-hidden">
+              <v-row no-gutters>
+                <v-col :order="mdAndUp ? 1 : 3" class="pa-3">
+                  <v-card-title>
+                    <h3 class="text-h4 solution-head px-2">
+                      2. SEO・リスティング代行
+                    </h3>
+                  </v-card-title>
+                  <v-card-text class="mx-0 mx-md-3">
+                    <ul class="text-h6">
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          ハイクオリティなランディングページが1ページ無料
+                        </span>
+                      </li>
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          キーワード選定、広告文作成、LPOに自身。DSP広告も無料でバナー作成
+                        </span>
+                      </li>
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          きめ細やかなサポート体制で、様々なご要望にお答え
+                        </span>
+                      </li>
+                    </ul>
+                    <p class="mt-5 text-body-1">
+                      LP制作とLPOの技術力に自身があります。<br />
+                      広告運用手数料は相場より格安の10%<br />
+                      商材の独自の強みや差別化ポイントを抽出し、ユニークセリングプロポジションを作り出します。<br /><br />
+                      また、運用レポートを毎週提示致します。<br />
+                      ダッシュボードでリアルタイムに成果が把握できます。<br />
+                      きめ細やかなサポート体制で、お客様のリードジェネレーションに貢献いたします。
+                    </p>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="12" md="4" lg="3" order="2" class="pa-0">
+                  <v-img
+                    :src="mentorImages.src600w"
+                    :aspect-ratio="mdAndUp ? undefined : 2"
+                    :height="mdAndUp ? '100%' : undefined"
+                  />
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
+      <div class="primary darken-3 mx-n3" id="solution-anim3-trigger">
+        <v-row
+          no-gutters
+          justify="center"
+          class="secondary darken-4 solution-anim3"
+        >
+          <v-col cols="12" sm="10" lg="8" class="py-10 px-5">
+            <v-card flat class="fill-height overflow-hidden">
+              <v-row no-gutters>
+                <v-col cols="12" md="4" lg="3" class="pa-0">
+                  <v-img
+                    :src="infraImages.src600w"
+                    :aspect-ratio="mdAndUp ? undefined : 2"
+                    :height="mdAndUp ? '100%' : undefined"
+                  />
+                </v-col>
+                <v-col class="pa-3">
+                  <v-card-title>
+                    <h3 class="text-h4 solution-head px-2">
+                      3. システム開発
+                    </h3>
+                  </v-card-title>
+                  <v-card-text class="mx-0 mx-md-3">
+                    <ul class="text-h6">
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          モダンでユーザのことをよく考えた、使いやすいUI/UX
+                        </span>
+                      </li>
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          クラウドインフラを活用した、高可用性、耐障害性、高セキュリティで
+                          <span class="d-inline-block"
+                            >優れたメンテナンス性</span
+                          >
+                        </span>
+                      </li>
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          お客様の業務ドメインを深く分析し、業務フローに応じたチューニング、最適解を提供
+                        </span>
+                      </li>
+                    </ul>
+                    <p class="mt-5 text-body-1">
+                      Nuxt.jsやServerless構成でのWebシステム開発は業界トップクラスの品質となります。<br />
+                      お客様を巻き込み、チーム一丸となってプロジェクトを円滑に進めるスクラム型の開発手法により、小さく始め、お客様のレビューを最大限取り入れながら改善を繰り返し、システムを成長させます。<br />
+                      長い目で見て、使われ続けるシステム、費用対効果にあったシステムの開発に尽力致します。<br />
+                      お客様の業務ドメインをヒアリングの回数を重ねながら細かく把握し、業務フローを洗い出し、システム化することで、どれほどの業務改善が見込めるか分析致します。
+                    </p>
+                  </v-card-text>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
+      <div class="secondary darken-4 mx-n3" id="solution-anim4-trigger">
+        <v-row
+          no-gutters
+          justify="center"
+          class="primary darken-3 solution-anim4"
+        >
+          <v-col cols="12" sm="10" lg="8" class="py-10 px-5">
+            <v-card flat class="fill-height overflow-hidden">
+              <v-row no-gutters>
+                <v-col :order="mdAndUp ? 1 : 3" class="pa-3">
+                  <v-card-title>
+                    <h3 class="text-h4 solution-head px-2">
+                      4. DX(デジタルトランスフォーメーション)支援
+                    </h3>
+                  </v-card-title>
+                  <v-card-text class="mx-0 mx-md-3">
+                    <ul class="text-h6">
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          効果を測定し、改善していくことで、業務プロセスのパフォーマンスを向上
+                        </span>
+                      </li>
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          業界動向の変化に合わせてシステムの調整を行い、事業継続性の向上につなげる
+                        </span>
+                      </li>
+                      <li>
+                        <v-icon color="info">check_circle</v-icon>
+                        <span>
+                          各種SaaS連携、チューニングにより一気通貫の業務フロー実現
+                        </span>
+                      </li>
+                    </ul>
+                    <p class="mt-5 text-body-1">
+                      弊社のシステム開発では、デジタルトランスフォーメーション(DX)を推進し、<br />
+                      お客様のビジネスを加速させることを第一に考えております。<br />
+                      テレワークにも最適なシステムを目指します。<br /><br />
+                      クラウドサービスも取り入れつつ、RPAやChatbotなどを活用し、独自のシステムと掛け合わせ、<br />
+                      お客様にあったシステムをご提供および導入のサポートを致します。
+                    </p>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="12" md="4" lg="3" order="2" class="pa-0">
+                  <v-img
+                    :src="bpmImages.src600w"
+                    :aspect-ratio="mdAndUp ? undefined : 2"
+                    :height="mdAndUp ? '100%' : undefined"
+                  />
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
     </v-container>
   </v-main>
 </template>
 
 <script lang="ts">
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Back, Expo, Sine, TweenMax } from 'gsap';
 import Vue from 'vue';
 
 import { NewsPost } from '~/domains/press';
@@ -290,6 +385,52 @@ export default Vue.extend({
   },
   mounted() {
     this.isMounted = true;
+    const tween1 = TweenMax.from('.mission-anim', 1.5, {
+      opacity: 0,
+      y: 50,
+      ease: Sine.easeOut,
+    });
+    const scene1 = this.$scrollmagic
+      .scene({
+        triggerElement: '#mission-anim-trigger',
+        triggerHook: 'onEnter',
+        reverse: false,
+      })
+      .setTween(tween1);
+    const tween2 = TweenMax.from('.solution-animation', 1, {
+      opacity: 0,
+      y: 130,
+      ease: Back.easeOut,
+    });
+    const scene2 = this.$scrollmagic
+      .scene({
+        triggerElement: '#solution-anim-trigger',
+        triggerHook: 'onEnter',
+        reverse: false,
+      })
+      .setTween(tween2);
+    this.$scrollmagic.addScene(scene1);
+    this.$scrollmagic.addScene(scene2);
+    const solutions = [
+      { no: 1, target: '#solution-anim1-trigger', from: 'left' },
+      { no: 2, target: '#solution-anim2-trigger', from: 'right' },
+      { no: 3, target: '#solution-anim3-trigger', from: 'left' },
+      { no: 4, target: '#solution-anim4-trigger', from: 'right' },
+    ];
+    solutions.forEach(({ no, target, from }) => {
+      const tween1 = TweenMax.from(`.solution-anim${no}`, 1.5, {
+        xPercent: from === 'left' ? -200 : 200,
+        ease: Expo.easeOut,
+      });
+      const scene = this.$scrollmagic
+        .scene({
+          triggerElement: target,
+          triggerHook: 'onEnter',
+          reverse: false,
+        })
+        .setTween(tween1);
+      this.$scrollmagic.addScene(scene);
+    });
   },
   computed: {
     mdAndUp(): boolean {
@@ -304,7 +445,13 @@ ul {
   list-style-type: none;
 }
 .v-icon {
-  margin-left: -24px;
+  margin-left: -30px;
   font-size: 24px;
+}
+.solution-head {
+  width: 100%;
+  font-weight: bold;
+  color: map-get($blue-grey, darken-2);
+  border-bottom: medium solid map-get($blue-grey, darken-2);
 }
 </style>

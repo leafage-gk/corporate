@@ -16,7 +16,13 @@ module.exports = {
   srcDir: './src',
   loading: { color: 'white' },
   css: ['./assets/style/app.scss'],
-  plugins: ['./plugins/inject'],
+  plugins: [
+    './plugins/inject',
+    {
+      src: './plugins/vue-scrollmagic',
+      ssr: false,
+    },
+  ],
   modules: ['@nuxtjs/axios', '@nuxtjs/sitemap'],
   buildModules: [
     '@nuxtjs/google-analytics',

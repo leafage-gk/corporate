@@ -6,6 +6,7 @@
       <v-btn
         text
         :class="{
+          'text-subtitle-1': true,
           'accent-header-btn': item.accent,
           'header-btn': !item.accent,
         }"
