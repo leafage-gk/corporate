@@ -42,4 +42,9 @@ module.exports = {
     etag: false,
     compressor: { threshold: Infinity },
   },
+  webfontloader: {
+    google: {
+      families: ['Oxanium:wght@500&display=swap'],
+    },
+  },
 };

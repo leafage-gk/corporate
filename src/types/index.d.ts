@@ -33,3 +33,8 @@ declare module '@nuxt/types' {
 declare module 'vue/types/vue' {
   interface Vue extends InjectedByPlugin {}
 }
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function Splitting(...args: any[]): any;
+}

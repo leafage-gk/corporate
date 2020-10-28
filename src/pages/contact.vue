@@ -2,7 +2,11 @@
   <v-main>
     <v-dialog v-model="dialog" width="800">
       <v-card>
-        <form name="contact" :action="actionUrl" method="POST">
+        <form
+          name="contact"
+          action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+          method="POST"
+        >
           <v-card-title class="headline grey lighten-2" primary-title>
             お問合せ内容確認
           </v-card-title>
@@ -44,13 +48,7 @@
               name="captcha_settings"
               value='{"keyname":"leafage","fallback":"true","orgId":"00D2x00000750Zd","ts":""}'
             />
-            <input
-              v-if="actionType === 'case'"
-              type="hidden"
-              name="orgid"
-              value="00D2x00000750Zd"
-            />
-            <input v-else type="hidden" name="oid" value="00D2x00000750Zd" />
+            <input type="hidden" name="oid" value="00D2x00000750Zd" />
             <input
               type="hidden"
               name="retURL"
@@ -229,18 +227,6 @@ export default Vue.extend({
     };
   },
   computed: {
-    actionType(): 'case' | 'lead' {
-      if (this.select === 'その他お問合せ') {
-        return 'case';
-      }
-      return 'lead';
-    },
-    actionUrl(): string {
-      if (this.actionType === 'case') {
-        return 'https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8';
-      }
-      return 'https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
-    },
     campaignId(): string {
       if (this.select === '案件のご相談・ご依頼') {
         return '7012x000000p2S5';
@@ -251,7 +237,6 @@ export default Vue.extend({
       return '';
     },
     contactList(): ContactInfo[] {
-      const isCase = this.actionType === 'case';
       return [
         {
           label: 'お問合せ種類',
@@ -265,21 +250,14 @@ export default Vue.extend({
           name: 'last_name',
           value: this.lastName,
           show: true,
-          hidden: !isCase,
+          hidden: true,
         },
         {
           label: '名',
           name: 'first_name',
           value: this.firstName,
           show: true,
-          hidden: !isCase,
-        },
-        {
-          label: '取引先責任者名',
-          name: isCase ? 'WebName__c' : 'name',
-          value: this.lastName + ' ' + this.firstName,
-          show: false,
-          hidden: isCase,
+          hidden: true,
         },
         {
           label: 'メールアドレス',
@@ -290,37 +268,37 @@ export default Vue.extend({
         },
         {
           label: '所属名・会社名',
-          name: isCase ? 'WebCompany__c' : 'company',
+          name: 'company',
           value: this.company,
           show: true,
           hidden: true,
         },
         {
           label: '電話番号',
-          name: isCase ? 'WebPhone__c' : 'phone',
+          name: 'phone',
           value: this.phone,
           show: true,
           hidden: true,
-        },
-        {
-          label: '件名',
-          name: 'subject',
-          value: 'その他お問合せ',
-          show: false,
-          hidden: isCase,
         },
         {
           label: 'リードソース',
           name: 'lead_source',
           value: 'Web',
           show: false,
-          hidden: !isCase,
+          hidden: true,
+        },
+        {
+          label: 'お問合せ内容',
+          name: 'descriptionShow',
+          value: this.description,
+          show: true,
+          hidden: false,
         },
         {
           label: 'お問合せ内容',
           name: 'description',
-          value: this.description,
-          show: true,
+          value: `${this.select}\n\n${this.description}`,
+          show: false,
           hidden: true,
         },
         {
@@ -328,14 +306,7 @@ export default Vue.extend({
           name: 'Campaign_ID',
           value: this.campaignId,
           show: false,
-          hidden: !isCase,
-        },
-        {
-          label: '種別',
-          name: 'type',
-          value: 'Question',
-          show: false,
-          hidden: isCase,
+          hidden: !!this.campaignId,
         },
       ];
     },

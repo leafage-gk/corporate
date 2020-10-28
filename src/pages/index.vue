@@ -6,19 +6,20 @@
         <v-col class="pa-0">
           <v-card tile flat class="text-center">
             <v-parallax
-              :height="mdAndUp ? 400 : 300"
+              class="black"
+              height="400"
               :src="require('~/assets/images/top/mission.webp')"
             >
               <v-overlay absolute z-index="-1" :opacity="0.4" />
               <v-card-title
                 class="justify-center accent--text text--lighten-2 front-weight-medium mission-anim"
               >
-                <h2 class="text-h4 text-md-h3">
+                <h2 class="text-h5 text-md-h3">
                   <span class="d-inline-block">リーフエイジの使命</span>
                   <span class="d-inline-block">- Our Mission -</span>
                 </h2>
               </v-card-title>
-              <v-card-text class="text-h6 text-md-h5 mission-anim">
+              <v-card-text class="text-subtitle-1 text-md-h5 mission-anim">
                 人々の記憶に残る、素敵な体験を世の中に届けたい。
               </v-card-text>
             </v-parallax>
@@ -35,7 +36,7 @@
             <v-row no-gutters align="center">
               <v-col>
                 <v-card-title>
-                  <h2 class="text-h4">お知らせ</h2>
+                  <h2 class="text-h6 text-md-h4">お知らせ</h2>
                 </v-card-title>
               </v-col>
               <v-col class="text-right">
@@ -52,7 +53,10 @@
                     {{ $moment(item.publishedAt).format('YYYY年MM月DD日') }}
                   </v-list-item-subtitle>
                   <v-list-item-title>
-                    <nuxt-link :to="`/press/${item.slug}`" class="text-h6">
+                    <nuxt-link
+                      :to="`/press/${item.slug}`"
+                      class="text-subtitle-2 text-md-h6"
+                    >
                       {{ item.title }}
                     </nuxt-link>
                   </v-list-item-title>
@@ -68,14 +72,18 @@
         id="solution-anim-trigger"
       >
         <v-col class="solution-animation text-center">
-          <v-icon color="info lighten-1" :size="100" class="mt-10 d-block">
+          <v-icon
+            color="info lighten-1"
+            :size="mdAndUp ? 100 : 60"
+            class="mt-5 mt-md-10 d-block"
+          >
             emoji_objects
           </v-icon>
           <h2
-            class="mb-10 mx-auto info--text text--lighten-1 text-h4 text-md-h3 font-weight-bold"
+            class="mb-5 mb-md-10 mx-auto info--text text--lighten-1 text-h5 text-md-h3 font-weight-bold"
           >
-            <span class="d-inline-block">リーフエイジ</span>
-            <span class="d-inline-block">のソリューション</span>
+            <span class="d-inline-block">リーフエイジの</span
+            ><span class="d-inline-block">ソリューション</span>
           </h2>
         </v-col>
       </v-row>
@@ -97,12 +105,12 @@
                 </v-col>
                 <v-col class="pa-3">
                   <v-card-title>
-                    <h3 class="text-h4 solution-head px-2">
+                    <h3 class="text-h6 text-md-h4 solution-head px-2">
                       1. ランディングページ・Webサイト制作
                     </h3>
                   </v-card-title>
                   <v-card-text class="mx-0 mx-md-3">
-                    <ul class="text-h6">
+                    <ul class="text-subtitle-2 text-md-h6">
                       <li>
                         <v-icon color="info">check_circle</v-icon>
                         <span>
@@ -125,7 +133,7 @@
                         </span>
                       </li>
                     </ul>
-                    <p class="mt-5 text-body-1">
+                    <p class="mt-5 text-caption text-md-body-1">
                       人目を引く・使いやすい・洗練されたデザインを重視してサイト制作します。<br />
                       LP制作はデザインからコーディング、運用まで多数の実績がございます。<br />
                       商材の独自の強みや差別化ポイントを抽出し、ユニークセリングプロポジションを作り出します。<br /><br />
@@ -140,7 +148,9 @@
                       href="https://studio-cleaf.com"
                       target="_blank"
                     >
-                      ホームページ・LP制作ならSTUDIO CLEAF
+                      ホームページ・LP制作なら<br
+                        class="d-block d-md-none"
+                      />STUDIO CLEAF
                       <v-icon right>play_arrow</v-icon>
                     </v-btn>
                     <v-spacer />
@@ -162,12 +172,12 @@
               <v-row no-gutters>
                 <v-col :order="mdAndUp ? 1 : 3" class="pa-3">
                   <v-card-title>
-                    <h3 class="text-h4 solution-head px-2">
+                    <h3 class="text-h6 text-md-h4 solution-head px-2">
                       2. SEO・リスティング代行
                     </h3>
                   </v-card-title>
                   <v-card-text class="mx-0 mx-md-3">
-                    <ul class="text-h6">
+                    <ul class="text-subtitle-2 text-md-h6">
                       <li>
                         <v-icon color="info">check_circle</v-icon>
                         <span>
@@ -187,7 +197,7 @@
                         </span>
                       </li>
                     </ul>
-                    <p class="mt-5 text-body-1">
+                    <p class="mt-5 text-caption text-md-body-1">
                       LP制作とLPOの技術力に自身があります。<br />
                       広告運用手数料は相場より格安の10%<br />
                       商材の独自の強みや差別化ポイントを抽出し、ユニークセリングプロポジションを作り出します。<br /><br />
@@ -227,12 +237,12 @@
                 </v-col>
                 <v-col class="pa-3">
                   <v-card-title>
-                    <h3 class="text-h4 solution-head px-2">
+                    <h3 class="text-h6 text-md-h4 solution-head px-2">
                       3. システム開発
                     </h3>
                   </v-card-title>
                   <v-card-text class="mx-0 mx-md-3">
-                    <ul class="text-h6">
+                    <ul class="text-subtitle-2 text-md-h6">
                       <li>
                         <v-icon color="info">check_circle</v-icon>
                         <span>
@@ -255,7 +265,7 @@
                         </span>
                       </li>
                     </ul>
-                    <p class="mt-5 text-body-1">
+                    <p class="mt-5 text-caption text-md-body-1">
                       Nuxt.jsやServerless構成でのWebシステム開発は業界トップクラスの品質となります。<br />
                       お客様を巻き込み、チーム一丸となってプロジェクトを円滑に進めるスクラム型の開発手法により、小さく始め、お客様のレビューを最大限取り入れながら改善を繰り返し、システムを成長させます。<br />
                       長い目で見て、使われ続けるシステム、費用対効果にあったシステムの開発に尽力致します。<br />
@@ -279,12 +289,12 @@
               <v-row no-gutters>
                 <v-col :order="mdAndUp ? 1 : 3" class="pa-3">
                   <v-card-title>
-                    <h3 class="text-h4 solution-head px-2">
+                    <h3 class="text-h6 text-md-h4 solution-head px-2">
                       4. DX(デジタルトランスフォーメーション)支援
                     </h3>
                   </v-card-title>
                   <v-card-text class="mx-0 mx-md-3">
-                    <ul class="text-h6">
+                    <ul class="text-subtitle-2 text-md-h6">
                       <li>
                         <v-icon color="info">check_circle</v-icon>
                         <span>
@@ -304,7 +314,7 @@
                         </span>
                       </li>
                     </ul>
-                    <p class="mt-5 text-body-1">
+                    <p class="mt-5 text-caption text-md-body-1">
                       弊社のシステム開発では、デジタルトランスフォーメーション(DX)を推進し、<br />
                       お客様のビジネスを加速させることを第一に考えております。<br />
                       テレワークにも最適なシステムを目指します。<br /><br />
@@ -407,6 +417,7 @@ export default Vue.extend({
         triggerElement: '#solution-anim-trigger',
         triggerHook: 'onEnter',
         reverse: false,
+        offset: 300,
       })
       .setTween(tween2);
     this.$scrollmagic.addScene(scene1);
@@ -427,6 +438,7 @@ export default Vue.extend({
           triggerElement: target,
           triggerHook: 'onEnter',
           reverse: false,
+          offset: 300,
         })
         .setTween(tween1);
       this.$scrollmagic.addScene(scene);
@@ -447,6 +459,10 @@ ul {
 .v-icon {
   margin-left: -30px;
   font-size: 24px;
+  @media #{map-get($display-breakpoints, 'sm-and-down')} {
+    margin-left: -22px;
+    font-size: 20px;
+  }
 }
 .solution-head {
   width: 100%;

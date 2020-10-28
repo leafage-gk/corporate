@@ -17,7 +17,7 @@
             gradient="to top, rgba(0, 0, 0, 0.6) 0%, transparent 70%"
           >
             <v-card-title>
-              <h1 class="white--text text-h4">
+              <h1 class="white--text text-h6 text-md-h4">
                 {{ press.title }}
               </h1>
             </v-card-title>

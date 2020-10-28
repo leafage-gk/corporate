@@ -8,16 +8,18 @@
         :srcs="footer"
       >
         <v-card-text>
-          <p :class="footerText">
-            LP・Webサイト制作、リスティング代行、システム開発など
-          </p>
-          <p :class="footerText">
-            Webに関することなら当社へお気軽にご相談ください
+          <p class="ma-0 white--text text-subtitle-2 text-md-subtitle-1">
+            <span class="d-inline-block">LP・Webサイト制作、</span>
+            <span class="d-inline-block">リスティング代行、</span>
+            <span class="d-inline-block">システム開発など</span>
+            <br class="d-none d-md-block" />
+            <span class="d-inline-block">Webに関することなら当社へ</span>
+            <span class="d-inline-block">お気軽にご相談ください</span>
           </p>
         </v-card-text>
         <v-btn
           :x-large="mdAndUp"
-          class="ma-6 text-h6"
+          class="ma-6 text-subtitle-1 text-md-h6"
           color="accent darken-1"
           to="/contact"
         >
@@ -27,12 +29,12 @@
       </responsive-image>
       <v-card-text class="secondary darken-4 white--text">
         <p class="ma-0">
-          <span>
+          <span class="d-inline-block">
             &copy; {{ new Date().getFullYear() }} {{ company }}
             All Rights Reserved.
           </span>
           <span class="mx-2">|</span>
-          <nuxt-link to="/privacy" class="white--text">
+          <nuxt-link to="/privacy" class="white--text d-inline-block">
             プライバシーポリシー
           </nuxt-link>
         </p>
@@ -67,14 +69,6 @@ export default Vue.extend({
     },
     mdAndUp(): boolean {
       return this.isMounted ? this.$vuetify.breakpoint.mdAndUp : true;
-    },
-    footerText(): Record<string, boolean> {
-      return {
-        'text-subtitle-1': this.mdAndUp,
-        'text-subtitle-2': !this.mdAndUp,
-        'ma-0': true,
-        'white--text': true,
-      };
     },
   },
 });

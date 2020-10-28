@@ -9,3 +9,5 @@ declare module '*.vue' {
 }
 
 declare module 'vue-scrollmagic';
+
+declare module 'splitting';

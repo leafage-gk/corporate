@@ -6,7 +6,7 @@
           <v-subheader><h2>最新情報</h2></v-subheader>
         </v-row>
         <v-row
-          class="my-3"
+          class="my-3 px-2 px-md-0"
           v-for="(item, index) in posts.contents"
           :key="index"
         >

@@ -79,6 +79,9 @@ table.overview {
     > th {
       color: map-get($cyan, base);
       text-align: right;
+      @media #{map-get($display-breakpoints, 'sm-and-down')} {
+        width: 30%;
+      }
     }
   }
 }
