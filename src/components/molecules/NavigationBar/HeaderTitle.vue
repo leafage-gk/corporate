@@ -9,7 +9,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import logo from '~/assets/images/LeafageLogo.svg';
+import logo from '~/assets/images/leafage-logo_yoko.png';
 
 export default Vue.extend({
   data() {
