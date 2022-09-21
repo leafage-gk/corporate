@@ -71,7 +71,7 @@
     "typescript": "^3.9.7",
     "url-loader": "^4.1.0",
     "vue-loader": "^15.9.3",
-    "vuetify": "^2.3.8",
+    "vuetify": "^2.6.10",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpackbar": "^4.0.0"
